@@ -1,3 +1,10 @@
 + Instructions for downloading and getting started in Eclipse.
 
-//TODO
+To get running in Eclipse:
+
+    -- Clone the repo into your workspace that Eclipse is using
+    -- In the project explorer window
+    ---- File > Import > General > Existing Projects into Workspace
+    ---- Make sure "Select root directory" is checked
+    ---- Click "Browse" and navigate to the project folder.
+    ---- Click Finish, and you should be good to go.
