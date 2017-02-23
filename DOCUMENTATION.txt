@@ -8,3 +8,16 @@ To get running in Eclipse:
     ---- Make sure "Select root directory" is checked
     ---- Click "Browse" and navigate to the project folder.
     ---- Click Finish, and you should be good to go.
+
++ Management subject to change
+
+Project Management:
+
+    -- Branch : master
+    ---- Master is basically a 'production line'
+    ---- Please reserve it for working copies of the project
+
+    -- Right now,
+    ---- Make yourself a branch, and work in that instead
+    ---- As  stated above, this may be subject to change, if it gets too much of a hassle,
+          we'll work purely out of master
