@@ -1,0 +1,101 @@
+-- Meeting Notes / Minutes 2/28
+-- Class Ideas
+
+Data Structures / Container Classes {
+-- Contacts
+
+-- Notes
+
+-- CourseWork
+
+-- Calendar
+}
+
+Data Classes {
+-- Note
+---- int                  id;
+---- String               title;
+---- String               body;
+---- Date                 date_modified;
+---- Date                 date_created;
+---- boolean              visible;
+---- people[]             associated_people;
+---- events[]             associated_events;
+---- Note[]               associated_notes;
+---- string[]             categories;
+---- boolean              isModified;
+---- String               toString();
+----
+---- Typical getters() / setters()
+
+-- Contact
+---- int                  id;
+---- String               first_name;
+---- String               last_name;
+---- String               association;
+---- String               address;
+---- String[]             email;
+---- Dict<char, String>   phone; // may be a Phone class
+// Ben's suggestion:
+// 2d array list or dictionary with indicator bits
+// just checking key elements
+---- String               birthday;
+---- String               company;
+---- boolean              is_emergency;
+---- Note                 note_id;
+---- boolean              isModified;
+---- String               toString();
+----
+---- Typical getters() / setters()
+
+-- Course
+---- int                  id;
+---- String               title;
+---- Events[]             asst_ids;
+---- int                  skip_total;
+---- int                  skips_used;
+---- Date                 start_date;
+---- Date                 end_date;
+---- Date                 meeting_time;
+---- boolean              isModified;
+---- String               toString();
+----
+---- Typical getters() / setters()
+
+-- Event
+---- int                  id;
+---- String               title;
+---- Date                 date;
+---- boolean              remind_me;
+---- Date                 reminder_date;
+---- String               description;
+---- boolean              isModified;
+---- String               toString();
+----
+---- Typical getters() / setters()
+
+-- User
+---- int / long UID;
+---- loadEvents()
+---- saveEvents()
+---- addEvent()
+---- loadCalendar()
+---- saveCalendar()
+---- loadNotes()
+---- saveNotes()
+---- addNote()
+---- loadContacts()
+---- saveContacts()
+---- addContact()
+---- modified()
+---- delete()
+----
+---- BST doesExist()??
+}
+
+-- Next time on DragonBall Z:
+---- Matt - Work on Object Input / Output
+---- Ben - Work on Object Input / Output
+---- If you feel like it : work on file saving / loading
+---- Will - work on interfaces for Note and Contact
+---- Trent - work on interfaces for Course and Event
