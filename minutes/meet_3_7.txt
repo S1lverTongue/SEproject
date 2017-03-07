@@ -1,0 +1,17 @@
+-- Meeting 3/7 Minutes/Notes
+
+-- From Last Time:
+---- Interfaces/Classes for Course, Event on Github
+
+-- Working on categories for contacts/notes
+----
+---- 2D array, working with categories
+---- Talk to Ben to get his input on it
+---- File Notes/Contacts under categories of the user's discretion
+
+-- Next Meeting: 3/9
+---- Start working on diagrams for the design walkthrough
+---- Will - work on Note class
+---- Ben - work on diagrams for what's online
+---- Matt - work on reading and writing
+---- Trent - work on keeping notes/contacts whatever linked together
