@@ -3,6 +3,29 @@ import java.time.Instant;
 
 public class CalendarEvent {
 	
+	/*
+	 * Interface block up top for ease of access
+	 * 
+	 * 
+	 * Interface:
+	 *  int getID()
+	 *  void setID()
+	 *  void setTitle()
+	 *  String getTitle()
+	 *  void setDate(Date)
+	 *  Date getDate()
+	 *  void setRemindMe(boolean)
+	 *  boolean getRemindMe()
+	 *  void setReminderDate(Date)
+	 *  Date getReminderDate()
+	 *  void setDescription(String)
+	 *  String getDescription()
+	 *  void setModified(boolean)
+	 *  boolean getModified()
+	 *  String toString()
+	 *  String toXML()
+	 */
+	
 	// gotta go in and review about setting the
 	// dates and stuff for in the future, may have
 	// to switch from the Date to a Calendar object
@@ -36,6 +59,11 @@ public class CalendarEvent {
 		this.setRemindMe(remindMe);
 		this.setReminderDate(reminderDate);
 		this.setDescription(description);
+	}
+	
+	// Sets the distinct id
+	public void setID(int id) {
+		this.id = id;
 	}
 	
 	// Gets the distinct id, how the Id will be made is
@@ -100,6 +128,16 @@ public class CalendarEvent {
 		return this.description;
 	}
 	
+	// Sets whether this CalendarEvent has been modified
+	public void setModified(boolean modified) {
+		this.isModified = modified;
+	}
+	
+	// Retrieves the isModified attribute of this CalendarEvent
+	public boolean getModified() {
+		return this.isModified;
+	}
+	
 	// Returns the String representation of this CalendarEvent
 	public String toString() {
 		String returnedString = "";
@@ -109,6 +147,7 @@ public class CalendarEvent {
 		returnedString += "Remind Me: " + this.getRemindMe() + "\n";
 		returnedString += "Reminder Date: " + this.getReminderDate().toString() + "\n";
 		returnedString += "Description: " + this.getDescription() + "\n";
+		returnedString += "IsModified: " + this.getModified() + "\n";
 		return returnedString;
 	}
 	
@@ -122,6 +161,7 @@ public class CalendarEvent {
 		xmlRepresentation += "<remindMe>" + this.getRemindMe() + "</remindMe>\n";
 		xmlRepresentation += "<reminderDate>" + this.getReminderDate().toString() + "</reminderDate>\n";
 		xmlRepresentation += "<description>" + this.getDescription() + "</description>\n";
+		xmlRepresentation += "<isModified>" + this.getModified() + "</isModified>\n";
 		xmlRepresentation += "</CalendarEvent>\n";
 		return xmlRepresentation;
 	}

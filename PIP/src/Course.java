@@ -4,6 +4,29 @@ import java.util.ArrayList;
 
 public class Course {
 	
+	/*
+	 * Interface:
+	 * 	void setID(int)
+	 * 	int getID()
+	 * 	void setTitle(String)
+	 * 	String getTitle()
+	 * 	void addEvent(CalendarEvent)
+	 * 	ArrayList<CalendarEvent> getAssociatedEventIds()
+	 * 	void setSkipTotal(int)
+	 * 	int getSkipTotal()
+	 * 	int getSkipsUsed()
+	 * 	void setStartDate(Date)
+	 * 	Date getStartDate()
+	 * 	void setEndDate(Date)
+	 * 	Date getEndDate()
+	 * 	void setMeetingTime(Date)
+	 * 	Date getMeetingTime()
+	 * 	void setModified(boolean)
+	 * 	boolean getModified()
+	 * 	String toString()
+	 * 	String toXML()
+	 */
+	
 	// Probably going to have to work with the Date
 	// objects again and go with Calendar objects and
 	// instances instead.
@@ -42,8 +65,13 @@ public class Course {
 		this.setMeetingTime(meetingTime);
 	}
 	
+	// sets the ID of this Course object
+	public void setID(int id) {
+		this.id = id;
+	}
+	
 	// retrieves the ID of this Course object
-	public int getId() {
+	public int getID() {
 		return this.id;
 	}
 	
@@ -117,10 +145,20 @@ public class Course {
 		return this.meetingTime;
 	}
 	
+	// sets the isModified attribute for this Course object
+	public void setModified(boolean modified) {
+		this.isModified = modified;
+	}
+	
+	// retrieves the isModified attribute for this Course object 
+	public boolean getModified() {
+		return this.isModified;
+	}
+	
 	// returns a String representation of this Course object
 	public String toString() {
 		String returnedString = "";
-		returnedString += "ID: " + this.getId() + "\n";
+		returnedString += "ID: " + this.getID() + "\n";
 		returnedString += "Title: " + this.getTitle() + "\n";
 		returnedString += "EventIds: " + this.getAssociatedEventIds().toString() + "\n";
 		returnedString += "SkipTotal: " + this.getSkipTotal() + "\n";
@@ -128,13 +166,14 @@ public class Course {
 		returnedString += "StartDate: " + this.getStartDate().toString() + "\n";
 		returnedString += "EndDate: " + this.getEndDate().toString() + "\n";
 		returnedString += "MeetingTime: " + this.getMeetingTime().toString() + "\n";
+		returnedString += "Modified: " + this.getModified() + "\n";
 		return returnedString;
 	}
 	
 	// returns a String XML representation of this Course object
 	public String toXML() {
 		String xmlRepresentation = "<Course>\n";
-		xmlRepresentation += "<id>" + this.getId() + "</id>\n";
+		xmlRepresentation += "<id>" + this.getID() + "</id>\n";
 		xmlRepresentation += "<title>" + this.getTitle() + "</title>\n";
 		xmlRepresentation += "<eventIds>" + this.getAssociatedEventIds().toString() + "</eventIds>\n";
 		xmlRepresentation += "<skipTotal>" + this.getSkipTotal() + "</skipTotal>\n";
@@ -142,6 +181,7 @@ public class Course {
 		xmlRepresentation += "<startDate>" + this.getStartDate().toString() + "</startDate>\n";
 		xmlRepresentation += "<endDate>" + this.getEndDate().toString() + "</endDate>\n";
 		xmlRepresentation += "<meetingTime>" + this.getMeetingTime().toString() + "</meetingTime>\n";
+		xmlRepresentation += "<isModified>" + this.getModified() + "</isModified>\n";
 		xmlRepresentation += "</Course>\n";
 		return xmlRepresentation;
 	}
