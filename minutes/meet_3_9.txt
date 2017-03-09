@@ -1,0 +1,79 @@
+-- Meeting 3/9 Minutes/Notes
+
+-- Today:
+---- Working on UML diagramming for Ben
+----
+---- Will's Ideas on Loading:
+---- " " courses = new
+---- Dictionary contacts = new
+---- Dictionary Notes = new
+---- load in object
+---- (
+---- )
+---- if obj == notes {
+      ArrangeNotes(Note, noteDict)
+      }
+---- if obj == Contacts {
+      ArrangeContact(Contact, contactDict)
+      }
+---- if obj == Course {
+      ArrangeCourses(Course, courseDict)
+      }
+----
+---- Arrange(obj, Dictionary) {
+      getTagFromObj()
+      if tag == "null" {
+        Add to misc Array List
+        }
+      else {
+          if (cat does not exist in dictionary) {
+            create New Array List
+            create New Dictionary With Cat Name
+            add Item To Array List For That Cat
+          }
+          else {
+            get array list for that cat
+            add item to that cat's array list
+          }
+        }
+      }
+    (tag, array list)
+
+    (tagname) ---- [][][][][][][][][][][]
+              \---[][][][][][][][][][][][]
+
+    on search load
+    map.getKeys()
+    pick key(tag)
+    pull that array list
+    load all or search through it
+    or search by name through list
+----
+---- UML ideas:
+----
+---- Course:
+----  has Notes
+----  has Contacts
+----  has CalendarEvents
+----
+---- CalendarEvent:
+----  has Notes
+----
+---- Note:
+----
+---- Contact:
+----  has Notes
+----
+---- User:
+----  has Notes
+----  has Contacts
+----  has CalendarEvents
+----  has Courses
+----
+
+-- Spring Break Assignments:
+---- Ben - work on diagramming and the uber linker object and GUI skeleton
+---- Trent - work on old school linking for a fall back
+---- Will - work on categorizing and arranging
+            based on Matt's object loader
+---- Matt - get object loader pushed up to hub, work on file system
