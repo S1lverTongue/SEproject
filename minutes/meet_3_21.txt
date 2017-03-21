@@ -1,0 +1,20 @@
+-- Meeting Notes / Minutes / 3/21
+
+-->>-->> Design walkthrough next week
+---- Get use case diagram
+---- Get class diagram
+
+---- Use Case Diagram
+----> User can:
+---->> Create, Delete, Search, Modify/Edit, View Data
+----> Software can:
+---->> Alert user
+
+---- Talked about the Linker
+---- Will uploaded his secretary class stuff
+
+-- For next time:
+---- Will  - clean up his stuff
+---- Matt  - clean up loader/saver,
+---- Ben   - work on linker
+---- Trent - work on packaging everything up, and work on starting I guess
