@@ -21,3 +21,12 @@ Project Management:
     ---- Make yourself a branch, and work in that instead
     ---- As  stated above, this may be subject to change, if it gets too much of a hassle,
           we'll work purely out of master
+
+Package Structure:
+
+    -- pip's package structure is as follows (subject to change):
+    ---- gui --> all graphical user interface components
+    ---- com --> components like Note, CalendarEvent go here
+    ---- util --> helper classes
+    ---- app --> package containing the code that will actually start the
+                 program, may be scrapped in the end
