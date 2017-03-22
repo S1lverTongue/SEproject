@@ -1,3 +1,5 @@
+package com;
+
 //interface for the contacts object
 public interface contacts {
 	//returns the id number of the contact object

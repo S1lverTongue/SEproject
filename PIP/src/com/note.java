@@ -1,3 +1,5 @@
+package com;
+
 //interface for the note objects used for
 //the notes section of the personal information
 //planner
