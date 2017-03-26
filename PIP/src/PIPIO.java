@@ -5,9 +5,9 @@
  *      will be needed when handling logins.
  *
  *  Loading and saving data objects:
- *      - Each 'load' method requires a username and returns a List<>
+ *      - Each 'load' method requires a username and returns a ArrayList<>
  *          of the data objects.
- *      - Each 'write' method requires a username and a List<> of the
+ *      - Each 'write' method requires a username and a ArrayList<> of the
  *          data objects desired to be written. There is no return value,
  *          but I may change the return to a boolean to signify a successful
  *          write.
@@ -15,18 +15,18 @@
  *  Methods:
  *      Loading methods:
  *      - User loadUser(String username)    <-- These two are used by
- *      - List<String> loadUsernames()      <-- the login module.
- *      - List<Note> loadNotes(String username)
- *      - List<Event> loadEvents(String username)
- *      - List<Course> loadCourses(String username)
- *      - List<Contact> loadContacts(String username)
+ *      - ArrayList<String> loadUsernames()      <-- the login module.
+ *      - ArrayList<Note> loadNotes(String username)
+ *      - ArrayList<Event> loadEvents(String username)
+ *      - ArrayList<Course> loadCourses(String username)
+ *      - ArrayList<Contact> loadContacts(String username)
  *
  *      Saving methods:
  *      - void saveUser(User user)
- *      - void saveNotes(String username, List<Note> notes)
- *      - void saveEvents(String username, List<Event> events)
- *      - void saveCourses(String username, List<Course> courses)
- *      - void saveContacts(String username, List<Contacts> contacts)
+ *      - void saveNotes(String username, ArrayList<Note> notes)
+ *      - void saveEvents(String username, ArrayList<Event> events)
+ *      - void saveCourses(String username, ArrayList<Course> courses)
+ *      - void saveContacts(String username, ArrayList<Contacts> contacts)
  */
 
 import java.util.*;
@@ -64,8 +64,8 @@ public class PIPIO {
         return result;
     }
 
-    public static List<String> loadUsernames() {
-        List<String> results = new ArrayList<String>();
+    public static ArrayList<String> loadUsernames() {
+        ArrayList<String> results = new ArrayList<String>();
         File directory = new File("");
         File[] files = directory.listFiles();
 
@@ -79,8 +79,8 @@ public class PIPIO {
         return results;
     }
 
-    public static List<Note> loadNotes(String username) {
-        List<Note> results = new ArrayList<Note>(); // will contain note objects
+    public static ArrayList<Note> loadNotes(String username) {
+        ArrayList<Note> results = new ArrayList<Note>(); // will contain note objects
         File directory = new File(username + "/Notes"); // the directory which holds objects
         File[] files = directory.listFiles(); // an array of files within the currentDirectory
 
@@ -117,8 +117,8 @@ public class PIPIO {
         return results;
     }
 
-    public static List<Event> loadEvents(String username) {
-        List<Event> results = new ArrayList<Event>(); // will contain event objects
+    public static ArrayList<Event> loadEvents(String username) {
+        ArrayList<Event> results = new ArrayList<Event>(); // will contain event objects
         File directory = new File(username + "/Events"); // the directory which holds objects
         File[] files = directory.listFiles(); // an array of files within the currentDirectory
 
@@ -157,8 +157,8 @@ public class PIPIO {
         return results;
     }
 
-    public static List<Contact> loadContacts(String username) {
-        List<Contact> results = new ArrayList<Contact>(); // will contain contact objects
+    public static ArrayList<Contact> loadContacts(String username) {
+        ArrayList<Contact> results = new ArrayList<Contact>(); // will contain contact objects
         File directory = new File(username + "/Contacts"); // the directory which holds objects
         File[] files = directory.listFiles(); // an array of files within the currentDirectory
 
@@ -197,8 +197,8 @@ public class PIPIO {
         return results;
     }
 
-    public static List<Course> loadCourses(String username) {
-        List<Course> results = new ArrayList<Course>(); // will contain note objects
+    public static ArrayList<Course> loadCourses(String username) {
+        ArrayList<Course> results = new ArrayList<Course>(); // will contain note objects
         File directory = new File(username + "/Courses"); // the directory which holds objects
         File[] files = directory.listFiles(); // an array of files within the currentDirectory
 
@@ -242,22 +242,22 @@ public class PIPIO {
         saveObject(user, user.getUsername(), "", "info.puid");
     }
 
-    public static void saveNotes(String username, List<Note> notes) {
+    public static void saveNotes(String username, ArrayList<Note> notes) {
         for (Note note : notes)
             saveObject(note, username, "Notes/", Integer.toString(note.getID()) + ".pip");
     }
 
-    public static void saveEvents(String username, List<Event> events) {
+    public static void saveEvents(String username, ArrayList<Event> events) {
         for (Event event : events)
             saveObject(event, username, "Events/", Integer.toString(event.getID()) + ".pip");
     }
 
-    public static void saveContacts(String username, List<Contact> contacts) {
+    public static void saveContacts(String username, ArrayList<Contact> contacts) {
         for (Contact contact : contacts)
             saveObject(contact, username, "Contacts/", Integer.toString(contact.getID()) + ".pip");
     }
 
-    public static void saveCourses(String username, List<Course> courses) {
+    public static void saveCourses(String username, ArrayList<Course> courses) {
         for (Course course : courses)
             saveObject(course, username, "Courses/", Integer.toString(course.getID()) + ".pip");
     }
