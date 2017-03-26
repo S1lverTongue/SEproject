@@ -11,6 +11,22 @@
  *          data objects desired to be written. There is no return value,
  *          but I may change the return to a boolean to signify a successful
  *          write.
+ *
+ *  Methods:
+ *      Loading methods:
+ *      - User loadUser(String username)    <-- These two are used by
+ *      - List<String> loadUsernames()      <-- the login module.
+ *      - List<Note> loadNotes(String username)
+ *      - List<Event> loadEvents(String username)
+ *      - List<Course> loadCourses(String username)
+ *      - List<Contact> loadContacts(String username)
+ *
+ *      Saving methods:
+ *      - void saveUser(User user)
+ *      - void saveNotes(String username, List<Note> notes)
+ *      - void saveEvents(String username, List<Event> events)
+ *      - void saveCourses(String username, List<Course> courses)
+ *      - void saveContacts(String username, List<Contacts> contacts)
  */
 
 import java.util.*;
