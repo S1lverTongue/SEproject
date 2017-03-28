@@ -1,0 +1,19 @@
+PIP's Basic File System Explanation:
+
+The root folder of PIP's filesystem contains subfolders, each with the name of a user but in lowercase.
+These are the "User folders." Examples:
+
+/                   <-- PIP's root directory
+/sanders0492/       <-- my user folder
+/silvertoe/
+/anotherusernameexample/
+
+
+
+Each user folder will contain 5 things:
+
+- info.puid         <-- This file contains info about the user.
+- Notes/            <-- These directories contain files for each object of their
+- Events/                   type. These are "data folders." The files inside of
+- Courses/                      data folders use the naming convention [id].pip
+- Contacts/
