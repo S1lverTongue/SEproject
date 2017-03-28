@@ -1,0 +1,39 @@
+-- Meeting Notes / Minutes 3/28
+
+-- Agenda:
+---- User Class
+---- Discuss Walkthrough
+---- Finalize Prototype Date
+---- Get Off-topic
+---- Discuss extra stuff
+
+---- Matt:
+
+public class User {
+  Attributes:
+  ---- id
+  ---- fname
+  ---- lname
+  ---- username
+  ---- ArrayList<T> (separate lists of all entities)
+  ---- Secretary<T> (separate secretaries for all entities)
+
+  User()
+
+  .setup()      // anything needing to be done
+  .loadData()   // pulls everything in
+  .saveData()   // spits everything back out
+}
+
+-- Add PIPEntity
+---- int id
+---- String tag
+
+Next time on Dragonball Z:
+---- Next Tuesday:
+------ Will - update Secretary
+------ Matt - get PIPIO to save/load the linkers, add a delete
+------ Trent - get classes and interfaces done online
+------ Ben - work on GUI and all that fun stuff
+------
+------ Gonna push for a rough prototype by next meeting
