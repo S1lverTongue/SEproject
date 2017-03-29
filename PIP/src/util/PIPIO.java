@@ -1,3 +1,5 @@
+package util;
+
 /*
  *  PIPIO is a static class that is responsible for reading and writing
  *      any of PIP's data objects to the filesystem (briefly explained
@@ -29,6 +31,7 @@
  *      - void saveContacts(String username, ArrayList<Contacts> contacts)
  */
 
+import com.*;
 import java.util.*;
 import java.io.*;
 
@@ -117,8 +120,8 @@ public class PIPIO {
         return results;
     }
 
-    public static ArrayList<Event> loadEvents(String username) {
-        ArrayList<Event> results = new ArrayList<Event>(); // will contain event objects
+    public static ArrayList<CalendarEvent> loadEvents(String username) {
+        ArrayList<CalendarEvent> results = new ArrayList<CalendarEvent>(); // will contain event objects
         File directory = new File(username + "/Events"); // the directory which holds objects
         File[] files = directory.listFiles(); // an array of files within the currentDirectory
 
@@ -132,7 +135,7 @@ public class PIPIO {
                     try {
                         FIS = new FileInputStream(file);
                         OIS = new ObjectInputStream(FIS);
-                        results.add((Event) OIS.readObject());
+                        results.add((CalendarEvent) OIS.readObject());
                     } catch (IOException | ClassNotFoundException e) {
                         e.printStackTrace();
                     } finally {
@@ -247,8 +250,8 @@ public class PIPIO {
             saveObject(note, username, "Notes/", Integer.toString(note.getID()) + ".pip");
     }
 
-    public static void saveEvents(String username, ArrayList<Event> events) {
-        for (Event event : events)
+    public static void saveEvents(String username, ArrayList<CalendarEvent> events) {
+        for (CalendarEvent event : events)
             saveObject(event, username, "Events/", Integer.toString(event.getID()) + ".pip");
     }
 

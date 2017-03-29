@@ -1,3 +1,5 @@
+package util;
+
 public class linker{
 
 /* The basic idea is to store the id's that link together. I had a thought to

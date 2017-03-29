@@ -1,3 +1,4 @@
+package util;
 //interface for the secretary object
 public interface iSec {
 	void add(Object o, String n, String t);
