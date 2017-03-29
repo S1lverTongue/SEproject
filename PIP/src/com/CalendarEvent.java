@@ -1,7 +1,6 @@
 package com;
 
 import java.util.Date;
-import java.time.Instant;
 
 public class CalendarEvent {
 	
@@ -42,13 +41,7 @@ public class CalendarEvent {
 	
 	// Default Constructor, dates set to null
 	// be refactored lately
-	public CalendarEvent() {
-		this.setTitle("");
-		this.setDate(Date.from(Instant.now()));
-		this.setRemindMe(false);
-		this.setReminderDate(Date.from(Instant.now()));
-		this.setDescription("");
-	}
+	public CalendarEvent() {}
 	
 	// More verbose constructor for the CalendarEvent object
 	public CalendarEvent(String title, 
