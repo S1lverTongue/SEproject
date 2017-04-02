@@ -1,8 +1,9 @@
 package com;
 
+import util.*;
 import java.util.*;
 
-public class Note {
+public class Note extends PIPEntity {
 	
 	/*
 	 * Interface block up top for ease of access
@@ -20,6 +21,9 @@ public class Note {
 	 *  Date getDateModded()
 	 *  void setVisible()
 	 *  boolean getVisible()
+	 *  void addLink()
+	 *  void removeLink()
+	 *  Linker get
 	 *  void addContact()
 	 *  void removeContact()
 	 *  ArrayList<Contact> getAssociatedContacts()
@@ -38,16 +42,20 @@ public class Note {
 	protected Date dateCreated;
 	protected Date dateModded;
 	protected boolean isVisible;
-	protected ArrayList<Contact> associatedContacts;
-	protected ArrayList<CalendarEvent> associatedEvents;
+	//protected ArrayList<Contact> associatedContacts;
+	//protected ArrayList<CalendarEvent> associatedEvents;
 	protected boolean isModified;
 	protected ArrayList<String> associatedTags;
+	protected Linker associatedPIPEntities;
 	
 	// Constructor
 	public Note() {
-		this.associatedContacts = new ArrayList<Contact>();
-		this.associatedEvents = new ArrayList<CalendarEvent>();
+		//this.associatedContacts = new ArrayList<Contact>();
+		//this.associatedEvents = new ArrayList<CalendarEvent>();
 		this.associatedTags = new ArrayList<String>();
+		this.associatedPIPEntities = new Linker();
+		this.dateCreated = new Date();
+		this.dateModded = new Date();
 	}
 	
 	// Sets object id
@@ -110,6 +118,22 @@ public class Note {
 		return this.isVisible;
 	}
 	
+	// adds a link to this object
+	public void addLink(String typeToBeLinked, int idToBeLinked) {
+		this.getAssociatedPIPEntities().addLink(typeToBeLinked, idToBeLinked);
+	}
+	
+	// removes a link from this object
+	public void removeLink(String typeToBeUnlinked, int idToBeUnlinked) {
+		this.getAssociatedPIPEntities().addLink(typeToBeUnlinked, idToBeUnlinked);
+	}
+	
+	// gets the linker object associated with this linker
+	public Linker getAssociatedPIPEntities() {
+		return this.associatedPIPEntities;
+	}
+	
+	/*
 	// adds an associated contact
 	public void addContact(Contact newContact) {
 		this.associatedContacts.add(newContact);
@@ -154,6 +178,7 @@ public class Note {
 	public ArrayList<CalendarEvent> getAssociatedEvents() {
 		return this.associatedEvents;
 	}
+	*/
 	
 	// sets modified
 	public void setModified(boolean modified) {
@@ -173,18 +198,23 @@ public class Note {
 	// removes a tag from associated tags
 	// subject to change
 	public void removeTag(String removedTag) {
-		ListIterator<String> tagListIterator = this.associatedTags.listIterator();
-		while (tagListIterator.hasNext()) {
-			String comparator = tagListIterator.next();
-			if (comparator.equals(removedTag)) {
-				this.associatedTags.remove(comparator);
-				break;
-			}
+		if (this.associatedTags.contains(removedTag)) {
+			this.associatedTags.remove(removedTag);
 		}
 	}
 	
 	// gets the list of associated tags
 	public ArrayList<String> getAssociatedTags() {
 		return this.associatedTags;
+	}
+	
+	public String toString() {
+		String returnedString = "";
+		returnedString += "Title: " + this.getTitle() + "\n";
+		returnedString += "Date Created: " + this.getDateCreated().toString() + "\n";
+		returnedString += "Last Modified: " + this.getDateModded().toString() + "\n";
+		returnedString += "Tags: " + this.getAssociatedTags().toString() + "\n";
+		returnedString += "Description: " + this.getBody() + "\n";
+		return returnedString;
 	}
 }

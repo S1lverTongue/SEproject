@@ -1,8 +1,11 @@
 package com;
 
+import util.*;
+
+import java.time.Instant;
 import java.util.Date;
 
-public class CalendarEvent {
+public class CalendarEvent extends PIPEntity {
 	
 	/*
 	 * Interface block up top for ease of access
@@ -38,22 +41,14 @@ public class CalendarEvent {
 	protected Date reminderDate;
 	protected String description;
 	private boolean isModified;
+	protected Linker associatedPIPEntities;
 	
-	// Default Constructor, dates set to null
-	// be refactored lately
-	public CalendarEvent() {}
-	
-	// More verbose constructor for the CalendarEvent object
-	public CalendarEvent(String title, 
-						 Date date, 
-						 boolean remindMe, 
-						 Date reminderDate, 
-						 String description) {
-		this.setTitle(title);
-		this.setDate(date);
-		this.setRemindMe(remindMe);
-		this.setReminderDate(reminderDate);
-		this.setDescription(description);
+	// Constructor probably going to change the dates
+	// later
+	public CalendarEvent() {
+		this.associatedPIPEntities = new Linker();
+		this.date = Date.from(Instant.now());
+		this.reminderDate = Date.from(Instant.now());
 	}
 	
 	// Sets the distinct id
@@ -123,6 +118,21 @@ public class CalendarEvent {
 		return this.description;
 	}
 	
+	// adds a link to this object's associated linker
+	public void addLink(String objectToBeLinked, int idToBeLinked) {
+		this.getAssociatedPIPEntities().addLink(objectToBeLinked, idToBeLinked);
+	}
+	
+	// removes a link from this object's associated linker
+	public void removeLink(String objectToBeUnlinked, int idToBeUnlinked) {
+		this.getAssociatedPIPEntities().removeLink(objectToBeUnlinked, idToBeUnlinked);
+	}
+	
+	// gets the linker associated with this object
+	public Linker getAssociatedPIPEntities() {
+		return this.associatedPIPEntities;
+	}
+	
 	// Sets whether this CalendarEvent has been modified
 	public void setModified(boolean modified) {
 		this.isModified = modified;
@@ -137,27 +147,11 @@ public class CalendarEvent {
 	public String toString() {
 		String returnedString = "";
 		returnedString += "Title: " + this.getTitle() + "\n";
-		returnedString += "ID: " + this.getID() + "\n";
 		returnedString += "Date: " + this.getDate().toString() + "\n";
 		returnedString += "Remind Me: " + this.getRemindMe() + "\n";
 		returnedString += "Reminder Date: " + this.getReminderDate().toString() + "\n";
 		returnedString += "Description: " + this.getDescription() + "\n";
 		returnedString += "IsModified: " + this.getModified() + "\n";
 		return returnedString;
-	}
-	
-	// Returns a String representation of this CalendarEvent
-	// in XML format
-	public String toXML() {
-		String xmlRepresentation = "<CalendarEvent>\n";
-		xmlRepresentation += "<id>" + this.getID() + "</id>\n";
-		xmlRepresentation += "<title>" + this.getTitle() + "</title>\n";
-		xmlRepresentation += "<date>" + this.getDate().toString() + "</date>\n";
-		xmlRepresentation += "<remindMe>" + this.getRemindMe() + "</remindMe>\n";
-		xmlRepresentation += "<reminderDate>" + this.getReminderDate().toString() + "</reminderDate>\n";
-		xmlRepresentation += "<description>" + this.getDescription() + "</description>\n";
-		xmlRepresentation += "<isModified>" + this.getModified() + "</isModified>\n";
-		xmlRepresentation += "</CalendarEvent>\n";
-		return xmlRepresentation;
 	}
 }

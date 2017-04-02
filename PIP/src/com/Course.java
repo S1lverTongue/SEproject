@@ -1,10 +1,11 @@
 package com;
 
+import util.*;
+import java.util.ArrayList;
 import java.util.Date;
 import java.time.Instant;
-import java.util.ArrayList;
 
-public class Course {
+public class Course extends PIPEntity {
 	
 	/*
 	 * Interface:
@@ -23,6 +24,9 @@ public class Course {
 	 * 	Date getEndDate()
 	 * 	void setMeetingTime(Date)
 	 * 	Date getMeetingTime()
+	 *  void addAssignment()
+	 *  void removeAssignment()
+	 *  ArrayList<Assignment> getAssignments()
 	 * 	void setModified(boolean)
 	 * 	boolean getModified()
 	 * 	String toString()
@@ -34,37 +38,22 @@ public class Course {
 	// instances instead.
 	private int id;
 	protected String title;
-	protected ArrayList<CalendarEvent> eventIds;
+	//protected ArrayList<CalendarEvent> eventIds;
 	protected int skipTotal;
 	protected int skipsUsed;
 	protected Date startDate;
 	protected Date endDate;
 	protected Date meetingTime;
+	protected ArrayList<Assignment> assignments;
+	protected Linker associatedPIPEntities;
 	private boolean isModified;
 	
-	// Default constructor for the Course
+	// Constructor. Possibly changing the dates later
 	public Course() {
-		this.setTitle("");
-		this.eventIds = new ArrayList<CalendarEvent>();
-		this.setSkipTotal(0);
-		this.skipsUsed = 0;
-		this.setStartDate(Date.from(Instant.now()));
-		this.setEndDate(Date.from(Instant.now()));
-		this.setMeetingTime(Date.from(Instant.now()));
-	}
-	
-	// More concise constructor for the Course object
-	public Course(String title,
-				  int skipTotal,
-				  Date startDate,
-				  Date endDate,
-				  Date meetingTime) {
-		this.setTitle(title);
-		this.eventIds = new ArrayList<CalendarEvent>();
-		this.setSkipTotal(skipTotal);
-		this.setStartDate(startDate);
-		this.setEndDate(endDate);
-		this.setMeetingTime(meetingTime);
+		this.associatedPIPEntities = new Linker();
+		this.startDate = Date.from(Instant.now());
+		this.endDate = Date.from(Instant.now());
+		this.meetingTime = Date.from(Instant.now());
 	}
 	
 	// sets the ID of this Course object
@@ -87,6 +76,7 @@ public class Course {
 		return this.title;
 	}
 	
+	/*
 	// adds an event to this Course object
 	public void addEvent(CalendarEvent newEvent) {
 		this.eventIds.add(newEvent);
@@ -97,6 +87,7 @@ public class Course {
 	public ArrayList<CalendarEvent> getAssociatedEventIds() {
 		return this.eventIds;
 	}
+	*/
 	
 	// sets how many skip days that this Course allows a
 	// participant
@@ -147,6 +138,39 @@ public class Course {
 		return this.meetingTime;
 	}
 	
+	// adds an assignment to the list
+	public void addAssignment(Assignment newAssignment) {
+		this.assignments.add(newAssignment);
+	}
+	
+	// removes a specified assignment from the course
+	public void removeAssignment(Assignment oldAssignment) {
+		Assignment comparator = oldAssignment;
+		if (this.assignments.contains(comparator)) {
+			this.assignments.remove(comparator);
+		}
+	}
+	
+	// gets the list of assignments for this course
+	public ArrayList<Assignment> getAssignments() {
+		return this.assignments;
+	}
+	
+	// adds a link to the linker associated with this course
+	public void addLink(String objectToBeLinkedTo, int idToBeLinkedTo) {
+		this.getAssociatedPIPEntities().addLink(objectToBeLinkedTo, idToBeLinkedTo);
+	}
+	
+	// removes a link from linker associated with this course 
+	public void removeLink(String objectToBeUnlinked, int idToBeUnlinked) {
+		this.getAssociatedPIPEntities().removeLink(objectToBeUnlinked, idToBeUnlinked);
+	}
+	
+	// gets the linker associated with course
+	public Linker getAssociatedPIPEntities() {
+		return this.associatedPIPEntities;
+	}
+	
 	// sets the isModified attribute for this Course object
 	public void setModified(boolean modified) {
 		this.isModified = modified;
@@ -160,31 +184,12 @@ public class Course {
 	// returns a String representation of this Course object
 	public String toString() {
 		String returnedString = "";
-		returnedString += "ID: " + this.getID() + "\n";
 		returnedString += "Title: " + this.getTitle() + "\n";
-		returnedString += "EventIds: " + this.getAssociatedEventIds().toString() + "\n";
-		returnedString += "SkipTotal: " + this.getSkipTotal() + "\n";
-		returnedString += "SkipsTotal: " + this.getSkipsUsed() + "\n";
-		returnedString += "StartDate: " + this.getStartDate().toString() + "\n";
-		returnedString += "EndDate: " + this.getEndDate().toString() + "\n";
-		returnedString += "MeetingTime: " + this.getMeetingTime().toString() + "\n";
-		returnedString += "Modified: " + this.getModified() + "\n";
+		returnedString += "Allowable Skips: " + this.getSkipTotal() + "\n";
+		returnedString += "Skips Used: " + this.getSkipsUsed() + "\n";
+		returnedString += "Start Date: " + this.getStartDate().toString() + "\n";
+		returnedString += "EndD ate: " + this.getEndDate().toString() + "\n";
+		returnedString += "Meeting Time: " + this.getMeetingTime().toString() + "\n";
 		return returnedString;
-	}
-	
-	// returns a String XML representation of this Course object
-	public String toXML() {
-		String xmlRepresentation = "<Course>\n";
-		xmlRepresentation += "<id>" + this.getID() + "</id>\n";
-		xmlRepresentation += "<title>" + this.getTitle() + "</title>\n";
-		xmlRepresentation += "<eventIds>" + this.getAssociatedEventIds().toString() + "</eventIds>\n";
-		xmlRepresentation += "<skipTotal>" + this.getSkipTotal() + "</skipTotal>\n";
-		xmlRepresentation += "<skipsUsed>" + this.getSkipsUsed() + "</skipsUsed>\n";
-		xmlRepresentation += "<startDate>" + this.getStartDate().toString() + "</startDate>\n";
-		xmlRepresentation += "<endDate>" + this.getEndDate().toString() + "</endDate>\n";
-		xmlRepresentation += "<meetingTime>" + this.getMeetingTime().toString() + "</meetingTime>\n";
-		xmlRepresentation += "<isModified>" + this.getModified() + "</isModified>\n";
-		xmlRepresentation += "</Course>\n";
-		return xmlRepresentation;
 	}
 }

@@ -1,9 +1,11 @@
 package com;
 
+import util.*;
 import java.util.*;
+import java.time.Instant;
 
 //interface for the contacts object
-public class Contact {
+public class Contact extends PIPEntity {
 	
 	/*
 	 * Interface block up top for ease of access
@@ -51,12 +53,15 @@ public class Contact {
 	protected String description;
 	protected boolean isModified;
 	protected ArrayList<String> associatedTags;
+	protected Linker associatedPIPEntities;
 	
 	// Constructor
 	public Contact() {
 		this.associatedEmails = new ArrayList<String>();
 		this.associatedPhoneNumbers = new ArrayList<String>();
 		this.associatedTags = new ArrayList<String>();
+		this.birthday = Date.from(Instant.now());
+		this.associatedPIPEntities = new Linker();
 	}
 	
 	// sets id
@@ -106,13 +111,8 @@ public class Contact {
 	
 	// removes an email from the list based on a linear search
 	public void removeEmail(String email) {
-		ListIterator<String> emailListIterator = this.associatedEmails.listIterator();
-		while (emailListIterator.hasNext()) {
-			String comparator = emailListIterator.next();
-			if (comparator.equals(email)) {
-				this.associatedEmails.remove(comparator);
-				break;
-			}
+		if (this.associatedEmails.contains(email)) {
+			this.associatedEmails.remove(email);
 		}
 	}
 	
@@ -129,13 +129,8 @@ public class Contact {
 	// removes a phone number from the list based on
 	// a linear search
 	public void removePhoneNumber(String number) {
-		ListIterator<String> phoneNumberListIterator = this.associatedPhoneNumbers.listIterator();
-		while (phoneNumberListIterator.hasNext()) {
-			String comparator = phoneNumberListIterator.next();
-			if (comparator.equals(number)) {
-				this.associatedEmails.remove(comparator);
-				break;
-			}
+		if (this.associatedPhoneNumbers.contains(number)) {
+			this.associatedPhoneNumbers.remove(number);
 		}
 	}
 	
@@ -211,18 +206,44 @@ public class Contact {
 	
 	// linear search to remove tag
 	public void removeTag(String tag) {
-		ListIterator<String> associatedTagIterator = this.associatedTags.listIterator();
-		while (associatedTagIterator.hasNext()) {
-			String comparator = associatedTagIterator.next();
-			if (comparator.equals(tag)) {
-				this.associatedTags.remove(comparator);
-				break;
-			}
+		if (this.associatedTags.contains(tag)) {
+			this.associatedTags.remove(tag);
 		}
 	}
 	
 	// returns an ArrayList of the associated tags
 	public ArrayList<String> getAssociatedTags() {
 		return this.associatedTags;
+	}
+	
+	// adds a link to the associated Linker object
+	public void addLink(String objectToBeLinked, int idToBeLinked) {
+		this.getAssociatedPIPEntities().addLink(objectToBeLinked, idToBeLinked);
+	}
+	
+	// removes a link from the associated Linker object
+	public void removeLink(String objectToBeUnlinked, int idToBeUnlinked) {
+		this.getAssociatedPIPEntities().removeLink(objectToBeUnlinked, idToBeUnlinked);
+	}
+	
+	// gets the associated linker with this object
+	public Linker getAssociatedPIPEntities() {
+		return this.associatedPIPEntities;
+	}
+	
+	public String toString() {
+		String returnedString = "";
+		returnedString += "Name: " + this.getLastName() + ", " + this.getFirstName() + "\n";
+		returnedString += "Address: " + this.getAddress() +"\n";
+		returnedString += "Emails: " + this.getAssociatedEmails().toString() + "\n";
+		returnedString += "Phone: " + this.getAssociatedPhoneNumbers().toString() + "\n";
+		returnedString += "Is Emergency?" + this.getEmergency() + "\n";
+		if (this.birthday != null) 
+			returnedString += "Birthday: " + this.getBirthday().toString() + "\n";
+		returnedString += "Company: " + this.getCompany() + "\n";
+		returnedString += "Association: " + this.getAssociation() + "\n";
+		returnedString += "Contact Description: " + this.getDescription() + "\n";
+		returnedString += "Tags: " + this.getAssociatedTags().toString() + "\n";
+		return returnedString;
 	}
 }
