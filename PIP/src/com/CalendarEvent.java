@@ -3,6 +3,7 @@ package com;
 import util.*;
 
 import java.time.Instant;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CalendarEvent extends PIPEntity {
@@ -24,6 +25,12 @@ public class CalendarEvent extends PIPEntity {
 	 *  Date getReminderDate()
 	 *  void setDescription(String)
 	 *  String getDescription()
+	 *  void addTag()
+	 *  void removeTag()
+	 *  ArrayList<String> getAssociatedTags()
+	 *  void addLink()
+	 *  void removeLink()
+	 *  Linker getAssociatedPIPEntities()
 	 *  void setModified(boolean)
 	 *  boolean getModified()
 	 *  String toString()
@@ -40,6 +47,7 @@ public class CalendarEvent extends PIPEntity {
 	protected boolean remindMe;
 	protected Date reminderDate;
 	protected String description;
+	protected ArrayList<String> associatedTags;
 	private boolean isModified;
 	protected Linker associatedPIPEntities;
 	
@@ -47,6 +55,7 @@ public class CalendarEvent extends PIPEntity {
 	// later
 	public CalendarEvent() {
 		this.associatedPIPEntities = new Linker();
+		this.associatedTags = new ArrayList<String>();
 		this.date = Date.from(Instant.now());
 		this.reminderDate = Date.from(Instant.now());
 	}
@@ -132,6 +141,23 @@ public class CalendarEvent extends PIPEntity {
 	public Linker getAssociatedPIPEntities() {
 		return this.associatedPIPEntities;
 	}
+	
+	// adds a tag to this contact
+	public void addTag(String tag) {
+		this.associatedTags.add(tag);
+	}
+		
+	// linear search to remove tag
+	public void removeTag(String tag) {
+		if (this.associatedTags.contains(tag)) {
+			this.associatedTags.remove(tag);
+		}
+	}
+		
+	// returns an ArrayList of the associated tags
+	public ArrayList<String> getAssociatedTags() {
+		return this.associatedTags;
+	}	
 	
 	// Sets whether this CalendarEvent has been modified
 	public void setModified(boolean modified) {

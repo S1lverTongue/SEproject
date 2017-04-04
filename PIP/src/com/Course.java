@@ -27,6 +27,12 @@ public class Course extends PIPEntity {
 	 *  void addAssignment()
 	 *  void removeAssignment()
 	 *  ArrayList<Assignment> getAssignments()
+	 *  void addLink()
+	 *  void removeLink()
+	 *  Linker getAssociatedPIPEntities()
+	 *  void addTag()
+	 *  void removeTag()
+	 *  ArrayList<String> getAssociatedTags()
 	 * 	void setModified(boolean)
 	 * 	boolean getModified()
 	 * 	String toString()
@@ -45,12 +51,14 @@ public class Course extends PIPEntity {
 	protected Date endDate;
 	protected Date meetingTime;
 	protected ArrayList<Assignment> assignments;
+	protected ArrayList<String> associatedTags;
 	protected Linker associatedPIPEntities;
 	private boolean isModified;
 	
 	// Constructor. Possibly changing the dates later
 	public Course() {
 		this.associatedPIPEntities = new Linker();
+		this.associatedTags = new ArrayList<String>();
 		this.startDate = Date.from(Instant.now());
 		this.endDate = Date.from(Instant.now());
 		this.meetingTime = Date.from(Instant.now());
@@ -155,6 +163,24 @@ public class Course extends PIPEntity {
 	public ArrayList<Assignment> getAssignments() {
 		return this.assignments;
 	}
+	
+	// adds a tag to this course
+	public void addTag(String tag) {
+		this.associatedTags.add(tag);
+	}
+		
+	// linear search to remove tag
+	public void removeTag(String tag) {
+		if (this.associatedTags.contains(tag)) {
+			this.associatedTags.remove(tag);
+		}
+	}
+		
+	// returns an ArrayList of the associated tags
+	public ArrayList<String> getAssociatedTags() {
+		return this.associatedTags;
+	}
+		
 	
 	// adds a link to the linker associated with this course
 	public void addLink(String objectToBeLinkedTo, int idToBeLinkedTo) {
