@@ -32,6 +32,8 @@ package util;
  */
 
 import com.*;
+
+import java.nio.file.Files;
 import java.util.*;
 import java.io.*;
 
@@ -241,7 +243,6 @@ public class PIPIO {
     }
 
     public static void saveUser(User user) {
-        //
         saveObject(user, user.getUsername(), "", "info.puid");
     }
 
@@ -290,6 +291,16 @@ public class PIPIO {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    public static void deleteObject(int id, String username, String Directory) {
+        String path = username + "/" + Directory + "/" + id + ".pip";
+        try {
+            File file = new File(path);
+            file.delete();
+        } catch (Exception e) {
+            System.out.println("UH OH IN PIPIO!");
         }
     }
 }
