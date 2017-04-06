@@ -9,10 +9,10 @@ public interface iSec {
 	void deleteDrawer(String tag);
 	Object getFile(String tag, int name);
 	boolean search(String tag, int name);
-	public void yesMrClinton(ArrayList<Note> a);
-	public void yesMrClinton(ArrayList<Contact> a);
-	public void yesMrClinton(ArrayList<CalendarEvent> a);
-	public void yesMrClinton(ArrayList<Course> a);
+	public void yesMrClintonNote(ArrayList<Note> a);
+	public void yesMrClintonContact(ArrayList<Contact> a);
+	public void yesMrClintonCalanderEvent(ArrayList<CalendarEvent> a);
+	public void yesMrClintonCourse(ArrayList<Course> a);
 	public void save(Object o, String n, int t);
 	
 }

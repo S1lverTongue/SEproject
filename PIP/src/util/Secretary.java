@@ -1,4 +1,3 @@
-import com.*;
 import java.util.*;
 
 public class Secretary implements iSec {
@@ -98,38 +97,38 @@ public class Secretary implements iSec {
 	 * and runs through the ArrayList and adds each item in it to the secretary 
 	 * object. It uses the built in add on each one to accomplish this.
 	 */
-	public void yesMrClinton(ArrayList<Note> a) {
+	public void yesMrClintonNote(ArrayList<Note> a) {
 		for (int i = 0; i < a.size(); i++) {
-		Note blueDress = a.get(i);
+		note blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getID();
+		int cut = blueDress.getId();
 		add(blueDress, cut, book);	
 		}
 	}			
 
-	public void yesMrClinton(ArrayList<Contact> a) {
+	public void yesMrClintonContact(ArrayList<Contact> a) {
 		for (int i = 0; i < a.size(); i++) {
 		Contact blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getID();
+		int cut = blueDress.getId();
 		add(blueDress, cut, book);	
 		}
 	}	
 	
-	public void yesMrClinton(ArrayList<CalendarEvent> a) {
+	public void yesMrClintonCalandarEvent(ArrayList<CalendarEvent> a) {
 		for (int i = 0; i < a.size(); i++) {
 		CalendarEvent blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getID();
+		int cut = blueDress.getId();
 		add(blueDress, cut, book);	
 		}
 	}	
 
-	public void yesMrClinton(ArrayList<Course> a) {
+	public void yesMrClintonCourse(ArrayList<Course> a) {
 		for (int i = 0; i < a.size(); i++) {
 		Course blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getID();
+		int cut = blueDress.getId();
 		add(blueDress, cut, book);	
 		}
 	}	
@@ -148,12 +147,6 @@ public class Secretary implements iSec {
 			deleteFile(t, n);
 			add(o, n, t);
 		}
-	}
-
-	@Override
-	public void save(Object o, String n, int t) {
-		// TODO Auto-generated method stub
-		
 	}
 
 }
