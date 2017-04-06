@@ -1,5 +1,5 @@
 import java.util.*;
-
+import com.*;
 public class Secretary implements iSec {
 	String tag = "";
 	int name =  0;
@@ -99,7 +99,7 @@ public class Secretary implements iSec {
 	 */
 	public void yesMrClintonNote(ArrayList<Note> a) {
 		for (int i = 0; i < a.size(); i++) {
-		note blueDress = a.get(i);
+		Note blueDress = a.get(i);
 		String book = blueDress.getTag();
 		int cut = blueDress.getId();
 		add(blueDress, cut, book);	
