@@ -1,3 +1,4 @@
+import com.*;
 import java.util.*;
 
 public class Secretary implements iSec {
@@ -99,9 +100,9 @@ public class Secretary implements iSec {
 	 */
 	public void yesMrClinton(ArrayList<Note> a) {
 		for (int i = 0; i < a.size(); i++) {
-		note blueDress = a.get(i);
+		Note blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getId();
+		int cut = blueDress.getID();
 		add(blueDress, cut, book);	
 		}
 	}			
@@ -110,7 +111,7 @@ public class Secretary implements iSec {
 		for (int i = 0; i < a.size(); i++) {
 		Contact blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getId();
+		int cut = blueDress.getID();
 		add(blueDress, cut, book);	
 		}
 	}	
@@ -119,7 +120,7 @@ public class Secretary implements iSec {
 		for (int i = 0; i < a.size(); i++) {
 		CalendarEvent blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getId();
+		int cut = blueDress.getID();
 		add(blueDress, cut, book);	
 		}
 	}	
@@ -128,7 +129,7 @@ public class Secretary implements iSec {
 		for (int i = 0; i < a.size(); i++) {
 		Course blueDress = a.get(i);
 		String book = blueDress.getTag();
-		int cut = blueDress.getId();
+		int cut = blueDress.getID();
 		add(blueDress, cut, book);	
 		}
 	}	
@@ -147,6 +148,12 @@ public class Secretary implements iSec {
 			deleteFile(t, n);
 			add(o, n, t);
 		}
+	}
+
+	@Override
+	public void save(Object o, String n, int t) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
