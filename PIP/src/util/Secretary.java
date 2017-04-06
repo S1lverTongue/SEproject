@@ -2,7 +2,7 @@ import java.util.*;
 
 public class Secretary implements iSec {
 	String tag = "";
-	int name =  "";
+	int name =  0;
 	TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	
 	/*
@@ -19,7 +19,7 @@ public class Secretary implements iSec {
 			tempMap.put(name, o);
 			cabinet.put(tag,  tempMap);
 		} else {
-			TreeMap<String, Object> row = new TreeMap<String, Object>();
+			TreeMap<Integer, Object> row = new TreeMap<Integer, Object>();
 			row.put(name, o);
 			cabinet.put(tag,  row);
 		}//close if
