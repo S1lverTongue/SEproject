@@ -1,16 +1,18 @@
-import java.util.*;
+package util;
+
 import com.*;
-public class Secretary implements iSec {
-	String tag = "";
-	int name =  0;
-	TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
+import java.util.*;
+
+public class Secretary {
+	private String tag = "";
+	private int name =  0;
+	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	
 	/*
 	 *add takes the object and gets the tag if there is already a tag 
 	 * for that type of object adds it to that row otherwise it creates
 	 * new row and puts it into it.
 	 */
-	@Override
 	public void add(Object o, int n, String t) {
 		tag = t;
 		name = n;
@@ -31,7 +33,6 @@ public class Secretary implements iSec {
 	 * returns them in the form of an
 	 * array of strings
 	 */
-	@Override
 	public String[] getTags() {
 		Set<String> s = cabinet.keySet();
 		String[] arr = s.toArray(new String[s.size()]);
@@ -43,7 +44,6 @@ public class Secretary implements iSec {
 	 * each of the tag drawers and returns 
 	 * them in the form of an array string
 	 */
-	@Override
 	public String[] getDrawer(String tag) {
 		TreeMap<Integer, Object> tempMap = cabinet.get(tag);
 		Set<Integer> s = tempMap.keySet();
@@ -54,7 +54,7 @@ public class Secretary implements iSec {
 	/*
 	 * deletes the object from the row
 	 */
-	@Override
+
 	public void deleteFile(String tag, int name) {
 		TreeMap<Integer, Object> tempMap = cabinet.get(tag);
 		tempMap.remove(name);
@@ -64,7 +64,6 @@ public class Secretary implements iSec {
 	/*
 	 * deletes everything related with the tag
 	 */
-	@Override
 	public void deleteDrawer(String tag) {
 		cabinet.remove(tag);
 	}
@@ -72,13 +71,11 @@ public class Secretary implements iSec {
 	/*
 	 * gets the object and returns it
 	 */
-	@Override
 	public Object getFile(String tag, int name) {
 		TreeMap<Integer, Object> tempMap = cabinet.get(tag);	
 		return tempMap.get(name);
 	}
 
-	@Override
 	public boolean search(String tag, int name) {
 		boolean found = false;
 		TreeMap<Integer, Object> tempMap = new TreeMap<Integer, Object>();
@@ -97,39 +94,35 @@ public class Secretary implements iSec {
 	 * and runs through the ArrayList and adds each item in it to the secretary 
 	 * object. It uses the built in add on each one to accomplish this.
 	 */
-	public void yesMrClintonNote(ArrayList<Note> a) {
-		for (int i = 0; i < a.size(); i++) {
-		Note blueDress = a.get(i);
-		String book = blueDress.getTag();
-		int cut = blueDress.getId();
-		add(blueDress, cut, book);	
+	public void yesMrClintonNotes(ArrayList<Note> a) {
+		for (Note blueDress : a) {
+			String book = blueDress.getTag();
+			int cut = blueDress.getID();
+			add(blueDress, cut, book);
 		}
 	}			
 
-	public void yesMrClintonContact(ArrayList<Contact> a) {
-		for (int i = 0; i < a.size(); i++) {
-		Contact blueDress = a.get(i);
-		String book = blueDress.getTag();
-		int cut = blueDress.getId();
-		add(blueDress, cut, book);	
+	public void yesMrClintonContacts(ArrayList<Contact> a) {
+		for (Contact blueDress : a) {
+			String book = blueDress.getTag();
+			int cut = blueDress.getID();
+			add(blueDress, cut, book);
 		}
 	}	
 	
-	public void yesMrClintonCalandarEvent(ArrayList<CalendarEvent> a) {
-		for (int i = 0; i < a.size(); i++) {
-		CalendarEvent blueDress = a.get(i);
-		String book = blueDress.getTag();
-		int cut = blueDress.getId();
-		add(blueDress, cut, book);	
+	public void yesMrClintonCalendarEvents(ArrayList<CalendarEvent> a) {
+		for (CalendarEvent blueDress : a) {
+			String book = blueDress.getTag();
+			int cut = blueDress.getID();
+			add(blueDress, cut, book);
 		}
 	}	
 
-	public void yesMrClintonCourse(ArrayList<Course> a) {
-		for (int i = 0; i < a.size(); i++) {
-		Course blueDress = a.get(i);
-		String book = blueDress.getTag();
-		int cut = blueDress.getId();
-		add(blueDress, cut, book);	
+	public void yesMrClintonCourses(ArrayList<Course> a) {
+		for (Course blueDress : a) {
+			String book = blueDress.getTag();
+			int cut = blueDress.getID();
+			add(blueDress, cut, book);
 		}
 	}	
 
@@ -141,12 +134,16 @@ public class Secretary implements iSec {
 	 * first then adds the updated one.
 	 */
 	public void save(Object o, int n, String t) {
-		if (search(t, n) == false) {
+		if (!search(t, n)) {
 			add(o, n, t);
 		} else {
 			deleteFile(t, n);
 			add(o, n, t);
 		}
+	}
+
+	public void save(Object o, String n, int t) {
+
 	}
 
 }
