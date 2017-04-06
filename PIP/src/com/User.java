@@ -66,11 +66,10 @@ public class User {
     // Any code to be executed when the user logs in
     public void onLogin() {
         loadData();
-        /*
-         *****************************
-         * needs secretary start ups *
-         *****************************
-         */
+        noteSec.yesMrClintonNotes(notes);
+        courseSec.yesMrClintonCourses(courses);
+        contactSec.yesMrClintonContacts(contacts);
+        calendarEventsSec.yesMrClintonCalendarEvents(calendarEvents);
     }
 
 
@@ -132,22 +131,22 @@ public class User {
      */
     public void newNote(Note note) {
         notes.add(note);
-        noteSec.add(note, "", "");
+        noteSec.add(note, note.getID(), note.getTag());
     }
 
     public void newCourse(Course course) {
         courses.add(course);
-        courseSec.add(course, "", "");
+        courseSec.add(course, course.getID(), course.getTag());
     }
 
     public void newContact(Contact contact) {
         contacts.add(contact);
-        contactSec.add(contact, "", "");
+        contactSec.add(contact, contact.getID(), contact.getTag());
     }
 
     public void newCalendarEvent(CalendarEvent calendarEvent) {
         calendarEvents.add(calendarEvent);
-        calendarEventsSec.add(calendarEvent, "", "");
+        calendarEventsSec.add(calendarEvent, calendarEvent.getID(), calendarEvent.getTag());
     }
 
     public void deleteNote(int id) {
@@ -156,6 +155,7 @@ public class User {
                 notes.remove(note);
                 break;
             }
+        PIPIO.deleteObject(id, username, "Notes");
     }
 
     public void deleteCourse(int id) {
@@ -164,6 +164,7 @@ public class User {
                 courses.remove(course);
                 break;
             }
+        PIPIO.deleteObject(id, username, "Courses");
     }
 
     public void deleteContact(int id) {
@@ -172,6 +173,7 @@ public class User {
                 contacts.remove(contact);
                 break;
             }
+        PIPIO.deleteObject(id, username, "Contacts");
     }
 
     public void deleteCalendarEvent(int id) {
@@ -180,5 +182,6 @@ public class User {
                 calendarEvents.remove(event);
                 break;
             }
+        PIPIO.deleteObject(id, username, "Events");
     }
 }
