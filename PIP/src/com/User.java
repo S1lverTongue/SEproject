@@ -1,5 +1,6 @@
 package com;
 
+import util.IDGenerator;
 import util.PIPIO;
 import util.Secretary;
 import java.util.*;
@@ -39,6 +40,8 @@ public class User {
     private int id;
     private String username;
 
+    private PIPIO pipio;
+
     private ArrayList<Note> notes;
     private ArrayList<Course> courses;
     private ArrayList<Contact> contacts;
@@ -49,8 +52,18 @@ public class User {
     private Secretary contactSec;
     private Secretary calendarEventsSec;
 
-    public User() {
+    public User(String _username) {
+        username = _username;
+        notes = new ArrayList<Note>();
+        courses = new ArrayList<Course>();
+        contacts = new ArrayList<Contact>();
+        calendarEvents = new ArrayList<CalendarEvent>();
+        initializeSecretaries();
 
+        // generate and set a unique user id
+        do {
+            id = IDGenerator.getID();
+        } while(PIPIO.loadUserIDs().contains(id));
     }
 
     public int getId() {
@@ -65,11 +78,9 @@ public class User {
 
     // Any code to be executed when the user logs in
     public void onLogin() {
+        pipio = new PIPIO(username);
         loadData();
-        noteSec.yesMrClintonNotes(notes);
-        courseSec.yesMrClintonCourses(courses);
-        contactSec.yesMrClintonContacts(contacts);
-        calendarEventsSec.yesMrClintonCalendarEvents(calendarEvents);
+        initializeSecretaries();
     }
 
 
@@ -85,21 +96,27 @@ public class User {
 
     // Load ArrayLists using PIPIO
     public void loadData() {
-        notes = PIPIO.loadNotes(username);
-        courses = PIPIO.loadCourses(username);
-        contacts = PIPIO.loadContacts(username);
-        calendarEvents = PIPIO.loadEvents(username);
+        notes = pipio.loadNotes();
+        courses = pipio.loadCourses();
+        contacts = pipio.loadContacts();
+        calendarEvents = pipio.loadCalendarEvents();
     }
 
 
     // Save ArrayLists using PIPIO
     public void saveData() {
-        PIPIO.saveNotes(username, notes);
-        PIPIO.saveCourses(username, courses);
-        PIPIO.saveContacts(username, contacts);
-        PIPIO.saveEvents(username, calendarEvents);
+        pipio.saveNotes(notes);
+        pipio.saveCourses(courses);
+        pipio.saveContacts(contacts);
+        pipio.saveCalendarEvents(calendarEvents);
     }
 
+    public void initializeSecretaries() {
+        noteSec.yesMrClintonNotes(notes);
+        courseSec.yesMrClintonCourses(courses);
+        contactSec.yesMrClintonContacts(contacts);
+        calendarEventsSec.yesMrClintonCalendarEvents(calendarEvents);
+    }
 
     // ** USE ONLY ON LOGOUT **
     //
@@ -122,6 +139,9 @@ public class User {
         contactSec = null;
         calendarEventsSec = null;
 
+        // release pipio
+        pipio = null;
+
     }
 
 
@@ -132,56 +152,64 @@ public class User {
     public void newNote(Note note) {
         notes.add(note);
         noteSec.add(note, note.getID(), note.getTag());
+        pipio.saveNote(note);
     }
 
     public void newCourse(Course course) {
         courses.add(course);
         courseSec.add(course, course.getID(), course.getTag());
+        pipio.saveCourse(course);
     }
 
     public void newContact(Contact contact) {
         contacts.add(contact);
         contactSec.add(contact, contact.getID(), contact.getTag());
+        pipio.saveContact(contact);
     }
 
     public void newCalendarEvent(CalendarEvent calendarEvent) {
         calendarEvents.add(calendarEvent);
         calendarEventsSec.add(calendarEvent, calendarEvent.getID(), calendarEvent.getTag());
+        pipio.saveCalendarEvent(calendarEvent);
     }
 
     public void deleteNote(int id) {
         for (Note note : notes)
             if (note.getID() == id) {
+                noteSec.deleteFile(note.getTag(), id);
                 notes.remove(note);
                 break;
             }
-        PIPIO.deleteObject(id, username, "Notes");
+        pipio.deleteNote(id);
     }
 
     public void deleteCourse(int id) {
         for (Course course : courses)
             if (course.getID() == id) {
+                courseSec.deleteFile(course.getTag(), id);
                 courses.remove(course);
                 break;
             }
-        PIPIO.deleteObject(id, username, "Courses");
+        pipio.deleteCourse(id);
     }
 
     public void deleteContact(int id) {
         for (Contact contact : contacts)
             if (contact.getID() == id) {
+                contactSec.deleteFile(contact.getTag(), id);
                 contacts.remove(contact);
                 break;
             }
-        PIPIO.deleteObject(id, username, "Contacts");
+        pipio.deleteContact(id);
     }
 
     public void deleteCalendarEvent(int id) {
         for (CalendarEvent event : calendarEvents)
             if (event.getID() == id) {
+                calendarEventsSec.deleteFile(event.getTag(), id);
                 calendarEvents.remove(event);
                 break;
             }
-        PIPIO.deleteObject(id, username, "Events");
+        pipio.deleteCalendarEvent(id);
     }
 }

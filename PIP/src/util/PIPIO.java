@@ -233,6 +233,17 @@ public class PIPIO {
         }
     }
 
+    private void deleteObject(int id, String type) {
+        String objPath = userDirectory + type + slash + id + ".pip";
+
+        try {
+            File file = new File(objPath);
+            file.delete();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     //
     //
@@ -282,20 +293,20 @@ public class PIPIO {
     //
     // methods for deleting a single PIPEntity from filesystem
     //
-    public void deleteNote(Note note) {
-        deleteObject(note);
+    public void deleteNote(int id) {
+        deleteObject(id, "Notes");
     }
 
-    public void deleteCourse(Course course) {
-        deleteObject(course);
+    public void deleteCourse(int id) {
+        deleteObject(id, "Courses");
     }
 
-    public void deleteContact(Contact contact) {
-        deleteObject(contact);
+    public void deleteContact(int id) {
+        deleteObject(id, "Contacts");
     }
 
-    public void deleteCalendarEvent(CalendarEvent event) {
-        deleteObject(event);
+    public void deleteCalendarEvent(int id) {
+        deleteObject(id, "Events");
     }
 
     //
