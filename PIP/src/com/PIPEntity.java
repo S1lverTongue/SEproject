@@ -8,9 +8,13 @@ public class PIPEntity {
 	 *
 	 * 	void setTag()
 	 * 	String getTag()
+	 * 
+	 * void setTitle()
+	 * String getTitle();
 	 */
 	private int id;
 	private String tag;
+	private String title;
 
 	public void setID(int id) {
 		this.id = id;
@@ -26,5 +30,11 @@ public class PIPEntity {
 
 	public String getTag() {
 		return this.tag;
+	}
+	public void setTitle(String title) {
+		this.title = title;
+	}
+	public String getTitle() {
+		return this.title;
 	}
 }
