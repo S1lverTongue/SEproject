@@ -14,7 +14,7 @@ public class NoteSecretary {
 	 * for that type of Note adds it to that row otherwise it creates
 	 * new row and puts it into it.
 	 */
-	public void add(PIPEntity o, int n, String t) {
+	public void add(Note o, int n, String t) {
 		String title = o.getTitle();
 		tag = t;
 		name = n;

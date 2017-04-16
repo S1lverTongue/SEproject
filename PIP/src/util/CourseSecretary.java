@@ -116,7 +116,7 @@ public class CourseSecretary {
 		} else {
 			temp.setTitle("FILE NOT FOUND");
 		}
-		return temp;4
+		return temp;
 	}
 
 	/*
