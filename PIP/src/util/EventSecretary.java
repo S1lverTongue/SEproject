@@ -69,6 +69,13 @@ public class EventSecretary {
 	 * deletes everything related with the tag
 	 */
 	public void deleteDrawer(String tag) {
+		TreeMap<Integer, CalendarEvent> temp = new TreeMap<Integer, CalendarEvent>();
+		Set<Integer> s = temp.keySet();
+		Integer[] arr = s.toArray(new Integer[s.size()]);
+		for (Integer remover : arr) {
+			CalendarEvent tempEvent = temp.get(remover);
+			index.remove(tempEvent.getTitle());
+		}
 		cabinet.remove(tag);
 	}
 	

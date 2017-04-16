@@ -66,6 +66,13 @@ public class CourseSecretary {
 	 * deletes everything related with the tag
 	 */
 	public void deleteDrawer(String tag) {
+		TreeMap<Integer, Course> temp = new TreeMap<Integer, Course>();
+		Set<Integer> s = temp.keySet();
+		Integer[] arr = s.toArray(new Integer[s.size()]);
+		for (Integer remover : arr) {
+			Course tempCourse = temp.get(remover);
+			index.remove(tempCourse.getTitle());
+		}
 		cabinet.remove(tag);
 	}
 	/*
