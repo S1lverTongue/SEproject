@@ -8,9 +8,10 @@ public class ContactSecretary {
 	private int name =  0;
 	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	private TreeMap<String, ArrayList> index = new TreeMap<String, ArrayList>();
+	private TreeMap<Integer, String> IDLookup = new TreeMap<Integer, String>();
 	
 	/*
-	 *add takes the object and gets the tag if there is already a tag 
+	 *add takes the Contact and gets the tag if there is already a tag 
 	 * for that type of object adds it to that row otherwise it creates
 	 * new row and puts it into it.
 	 */
@@ -19,6 +20,7 @@ public class ContactSecretary {
 		tag = t;
 		name = n;
 		addToIndex(title, t, n);
+		IDLookup.put(n, tag);
 		if (cabinet.containsKey(tag)) {
 			TreeMap<Integer , Contact> tempMap = cabinet.get(tag);
 			tempMap.put(name, o);
@@ -29,6 +31,8 @@ public class ContactSecretary {
 			cabinet.put(tag,  row);
 		}//close if
 	}//close add
+	
+	
 	/*
 	 * gets all the tags that exist and
 	 * returns them in the form of an
@@ -51,6 +55,7 @@ public class ContactSecretary {
 		String[] arr = s.toArray(new String[s.size()]);
 		return arr;
 	}
+	
 	/*
 	 * deletes the object from the row
 	 */
@@ -75,6 +80,7 @@ public class ContactSecretary {
 		}
 		cabinet.remove(tag);
 	}
+	
 	/*
 	 * gets the object and returns it
 	 */
@@ -95,6 +101,7 @@ public class ContactSecretary {
 		}
 		return found;
 	}
+	
 	/*
 	 * yesMrClinton brings in an array list and loads all of the
 	 * contacts into the appropriate spots in the cabinet
@@ -106,31 +113,12 @@ public class ContactSecretary {
 			add(blueDress, cut, book);
 		}
 	}	
-	/*
-	 * This save feature keeps from having to do more then one operation
-	 * in the main part of the program and instead takes care of it internally
-	 * in the secretary class so only one call has to be made. It takes the object
-	 * and if it doesn't exist and adds it. If it does exist it removes the old one 
-	 * first then adds the updated one.
-	 */
-	public void save(Contact o, int n, String t) {
-		if (!search(t, n)) {
-			add(o, n, t);
-		} else {
-			TreeMap<Integer, Contact> tempMap = cabinet.get(tag);
-			tempMap.remove(name);
-			cabinet.put(tag, tempMap);
-			add(o, n, t);
-		}
-	}
-	/*--------------------------------------------------------------------------------------------------------------------------------
-	 * -----------------------------------------------------------------------------------------------------------------------------*/
 
 	/*
 	 * SearchFor searches for an item and returns it used for each of the menus
 	 * it creates a new PIPEntity and then if the title exist loads it into the 
 	 */
-	public Contact searchFor (String title) {
+	public Contact searchByName (String title) {
 		Contact temp = new Contact();
 		ArrayList arrL = new ArrayList();
 		if (index.containsKey(title)) {
@@ -144,6 +132,16 @@ public class ContactSecretary {
 		return temp;
 	}
 
+	/*
+	 * SearchByID finds the ID and gets the tag from a map and then returns
+	 * the object back to the caller 
+	 */
+	public Contact searchByID(int ID) {
+		String tag = IDLookup.get(ID);
+		Contact temp = getFile(tag, ID);
+		return temp;
+	}
+	
 	/*
 	 * adds to the index the name of the object as a key and
 	 * an arraylist of 2 that contains the tag and ID that is needed to 
