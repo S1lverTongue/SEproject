@@ -39,7 +39,8 @@ public class Contact extends PIPEntity {
 	 *  void addTag()
 	 *  void removeTag()
 	 *  ArrayList<String> getAssociatedTags()
-	 *  void setTitle();
+	 *  void setTitle()
+	 *  String getTitle()
 	 */
 	private String title;
 	private int id;
@@ -250,5 +251,8 @@ public class Contact extends PIPEntity {
 	}
 	public void setTitle() {
 		this.title = firstName + lastName;
+	}
+	public String getTitle() {
+		return this.title;
 	}
 }
