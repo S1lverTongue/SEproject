@@ -136,7 +136,7 @@ public class User implements Serializable {
     //    IO (or otherwise unnecessary to save to IO)
     //     can be added here.
     //
-    private void disposeUserEnvironment() {
+    public void disposeUserEnvironment() {
         // clear ArrayLists
         notes = null;
         courses = null;
