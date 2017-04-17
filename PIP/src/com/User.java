@@ -3,6 +3,8 @@ package com;
 import util.IDGenerator;
 import util.PIPIO;
 import util.Secretary;
+
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -36,7 +38,7 @@ import java.util.*;
  *      - getUsername()
  *
  */
-public class User {
+public class User implements Serializable {
     private int id;
     private String username;
 
