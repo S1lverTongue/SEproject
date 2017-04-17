@@ -13,11 +13,18 @@ public class PIPSkeleton extends JFrame {
 	private PIPSkeleton curr;
 	private JTabbedPane views;
 	private NewMainView home;
+	private NotesView notes;
+	private CoursesView courses;
+	private ContactsView contacts;
+	private EventsView events;
+	private SearchView search;
 	private Dimension d;
+	
 	public PIPSkeleton() {
 		curr = this;
 		this.d = (Toolkit.getDefaultToolkit().getScreenSize());
 		setSize(d);
+		setMinimumSize(new Dimension(775, 750));
 		setResizable(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -30,11 +37,11 @@ public class PIPSkeleton extends JFrame {
 		initComponents();
 		
 		views.addTab("Home", home);
-		//views.addTab("Notes", null);
-		//views.addTab("Courses", null);
-		//views.addTab("Contacts", null);
-		//views.addTab("Events", null);
-		//views.addTab("Search", null);
+		views.addTab("Notes", notes);
+		views.addTab("Courses", courses);
+		views.addTab("Contacts", contacts);
+		views.addTab("Events", events);
+		views.addTab("Search", search);
 		views.setVisible(true);
 		
 		//System.out.println(views.getSize().toString());
@@ -59,6 +66,11 @@ public class PIPSkeleton extends JFrame {
 				System.out.println("Width: " + d.getWidth() + " :: Height: " + d.getHeight());
 				views.setSize(d);
 				home.resize(d);
+				notes.resize(d);
+				courses.resize(d);
+				contacts.resize(d);
+				events.resize(d);
+				search.resize(d);
 			}
 
 			@Override
@@ -76,6 +88,11 @@ public class PIPSkeleton extends JFrame {
 	
 	public void initComponents() {
 		home = new NewMainView(views.getSize());
+		notes = new NotesView(views.getSize());
+		courses = new CoursesView(views.getSize());
+		contacts = new ContactsView(views.getSize());
+		events = new EventsView(views.getSize());
+		search = new SearchView(views.getSize());
 	}
 	
 	public static void main(String[] args) {
