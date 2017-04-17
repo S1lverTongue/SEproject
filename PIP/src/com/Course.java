@@ -3,9 +3,10 @@ package com;
 import util.*;
 import java.util.ArrayList;
 import java.util.Date;
+import java.io.Serializable;
 import java.time.Instant;
 
-public class Course extends PIPEntity {
+public class Course extends PIPEntity implements Serializable {
 	
 	/*
 	 * Interface:
@@ -39,6 +40,10 @@ public class Course extends PIPEntity {
 	 * 	String toXML()
 	 */
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 3032767791345106378L;
 	// Probably going to have to work with the Date
 	// objects again and go with Calendar objects and
 	// instances instead.

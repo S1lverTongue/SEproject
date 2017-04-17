@@ -104,6 +104,7 @@ public class PIPIO {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        user.disposeUserEnvironment();
         saveUser(user);
     }
 
@@ -313,7 +314,6 @@ public class PIPIO {
     //
     // methods for loading PIPEntities. Returns ArrayLists
     //
-
     public ArrayList<Note> loadNotes() {
         ArrayList<Note> results = new ArrayList<Note>(); // will contain note objects
         File directory = new File(userDirectory + "Notes"); // the directory which holds objects

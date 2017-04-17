@@ -3,8 +3,6 @@ package com;
 import util.IDGenerator;
 import util.PIPIO;
 import util.Secretary;
-
-import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -38,7 +36,7 @@ import java.util.*;
  *      - getUsername()
  *
  */
-public class User implements Serializable {
+public class User {
     private int id;
     private String username;
 
@@ -136,7 +134,7 @@ public class User implements Serializable {
     //    IO (or otherwise unnecessary to save to IO)
     //     can be added here.
     //
-    public void disposeUserEnvironment() {
+    private void disposeUserEnvironment() {
         // clear ArrayLists
         notes = null;
         courses = null;

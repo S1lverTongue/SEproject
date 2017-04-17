@@ -2,16 +2,22 @@ package com;
 
 import util.*;
 import java.util.*;
+import java.io.Serializable;
 import java.time.*;
 
-public class Assignment extends CalendarEvent {
+public class Assignment extends CalendarEvent implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7736437292633479469L;
 	/*
 	 * Interface block:
 	 * 	see CalendarEvent.
 	 * 
 	 * 	Assignment does not
 	 */
+	
 	
 	public Assignment() {
 		this.date = Date.from(Instant.now());
