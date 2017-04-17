@@ -41,6 +41,7 @@ public class Contact extends PIPEntity {
 	 *  ArrayList<String> getAssociatedTags()
 	 *  void setTitle();
 	 */
+	private String title;
 	private int id;
 	protected String firstName;
 	protected String lastName;
