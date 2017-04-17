@@ -1,6 +1,7 @@
 package gui;
 
 import util.*;
+import com.User;
 
 import javax.swing.JFrame;
 import javax.swing.JTextField;
@@ -43,7 +44,8 @@ public class AddUserFrame extends JFrame {
 			public void actionPerformed(ActionEvent arg0) {
 				if (userField.getText().length() > 0) {
 					if (Filter.userFilter(userField.getText())) { // good username
-						// PIPIO.createUser(userField.getText());
+						User newUser = new User(userField.getText());
+						PIPIO.createUser(newUser);
 						System.out.println(userField.getText());
 						dispose();
 						PIPStart.changeWindow(new LoginFrame());
