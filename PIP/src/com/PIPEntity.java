@@ -1,6 +1,12 @@
 package com;
 
-public class PIPEntity {
+import java.io.Serializable;
+
+public class PIPEntity implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2927455895964225131L;
 	/*
 	 * Interface block:
 	 * 	void setID()
