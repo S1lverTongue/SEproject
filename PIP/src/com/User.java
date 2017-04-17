@@ -65,7 +65,8 @@ public class User {
             id = IDGenerator.getID();
         } while(PIPIO.loadUserIDs().contains(id));
 
-        onLogin();
+        pipio = new PIPIO(username);
+        initializeSecretaries();
     }
 
     public int getId() {
