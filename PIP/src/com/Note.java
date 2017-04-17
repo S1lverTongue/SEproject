@@ -2,10 +2,16 @@
 package com;
 
 import util.*;
+
+import java.io.Serializable;
 import java.util.*;
 
-public class Note extends PIPEntity {
+public class Note extends PIPEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1015392238591684665L;
 	/*
 	 * Interface block up top for ease of access
 	 * 

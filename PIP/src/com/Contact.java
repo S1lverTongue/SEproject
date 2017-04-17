@@ -2,11 +2,16 @@ package com;
 
 import util.*;
 import java.util.*;
+import java.io.Serializable;
 import java.time.Instant;
 
 //interface for the contacts object
-public class Contact extends PIPEntity {
+public class Contact extends PIPEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1515590804494603692L;
 	/*
 	 * Interface block up top for ease of access
 	 * 

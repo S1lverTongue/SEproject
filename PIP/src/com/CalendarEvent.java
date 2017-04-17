@@ -2,12 +2,17 @@ package com;
 
 import util.*;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class CalendarEvent extends PIPEntity {
+public class CalendarEvent extends PIPEntity implements Serializable {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7605917612747223537L;
 	/*
 	 * Interface block up top for ease of access
 	 * 
