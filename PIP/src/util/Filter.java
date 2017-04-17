@@ -32,4 +32,27 @@ public class Filter {
 		}
 		return returner;
 	}
+	
+	/*
+	 * Takes in a string and compares it to yes 
+	 * and changes the return value of emergency
+	 * to match it.
+	 */
+	public static boolean isEmerg (String checkString) {
+		boolean emergency = false;
+		if (checkString.equalsIgnoreCase("yes"))
+			emergency = true;
+		return emergency;
+	}
+	
+	/*
+	 * makes sure that all given strings contain only numbers and
+	 * no letters or symbols
+	 */
+	public static boolean isNumOnly(String checkString) {
+		boolean isNum = false;
+		if (checkString.matches("[0-9]+"));
+			isNum = true;
+		return isNum;
+	}
 }
