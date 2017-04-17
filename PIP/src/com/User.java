@@ -64,6 +64,8 @@ public class User {
         do {
             id = IDGenerator.getID();
         } while(PIPIO.loadUserIDs().contains(id));
+
+        onLogin();
     }
 
     public int getId() {
@@ -112,6 +114,11 @@ public class User {
     }
 
     public void initializeSecretaries() {
+        noteSec = new Secretary();
+        courseSec = new Secretary();
+        contactSec = new Secretary();
+        calendarEventsSec = new Secretary();
+
         noteSec.yesMrClintonNotes(notes);
         courseSec.yesMrClintonCourses(courses);
         contactSec.yesMrClintonContacts(contacts);
