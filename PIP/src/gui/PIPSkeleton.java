@@ -1,4 +1,5 @@
 package gui;
+import com.User;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
@@ -10,6 +11,7 @@ import javax.swing.JPanel;
 import java.awt.Dimension;
 
 public class PIPSkeleton extends JFrame {
+	private User loggedInUser;
 	private PIPSkeleton curr;
 	private JTabbedPane views;
 	private NewMainView home;
@@ -20,7 +22,9 @@ public class PIPSkeleton extends JFrame {
 	private SearchView search;
 	private Dimension d;
 	
-	public PIPSkeleton() {
+	public PIPSkeleton(User loggedInUser) {
+		this.loggedInUser = loggedInUser;
+		System.out.println(this.loggedInUser.toString());
 		curr = this;
 		this.d = (Toolkit.getDefaultToolkit().getScreenSize());
 		setSize(d);
@@ -93,9 +97,5 @@ public class PIPSkeleton extends JFrame {
 		contacts = new ContactsView(views.getSize());
 		events = new EventsView(views.getSize());
 		search = new SearchView(views.getSize());
-	}
-	
-	public static void main(String[] args) {
-		PIPSkeleton x = new PIPSkeleton();
 	}
 }
