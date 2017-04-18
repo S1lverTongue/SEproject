@@ -16,6 +16,8 @@ public class CourseSecretary {
 	 * new row and puts it into it.
 	 */
 	public void add(Course o, int n, String t) {
+		if (t.equals(""))
+			return;
 		String title = o.getTitle();
 		tag = t;
 		name = n;
