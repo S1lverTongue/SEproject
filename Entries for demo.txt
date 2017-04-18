@@ -1,0 +1,127 @@
+contact 1
+al 
+bundy
+9674 jeopardy lane Chicago IL
+May 6 1956
+Garys Shoes
+not emergency
+
+contact 2 
+Carl 	
+Winslow
+1516 W. Wrightwood Avenue Chicago, Illinois
+August 16, 1952
+Chicago Police
+not emergency
+
+contact 3
+Tim
+Taylor
+4889 binford venue Detroit, Michigian
+october 4 1957
+repair man
+not emergency
+
+
+contact 4
+carol
+foster
+44 brady lane Port Washington Wisconsin
+hair stylist
+not emergency
+
+contact 5 
+sheldon 
+cooper
+4A 2311 Los Robles
+physicist
+not emrgency
+
+contact 6
+Darth 
+Vader
+A galaxy far far away
+Empire Attitude Adjustment Division
+emergency
+
+_________________________________________________________________________
+note 1:
+Call about elevator
+
+Elevator still doesnt work remember to call
+landlord tommorow.
+
+created sept 24 2003
+
+
+
+note 2:
+Call Vader
+
+hoth is acting up again he might wana go
+and check it out
+
+created jan 19 2017
+
+note 3:
+get water heater replace
+
+tim worked on the water heater now its gone
+call Al and get a quote on the hole in the roof
+
+created feb 08 2010
+
+note 4:
+Finish Project
+
+Finish Software engineering product
+
+created April 17 2017
+
+___________________________________________________________________________
+Course 1
+course title World Domination 411
+12
+0
+Jan 13 2017
+1:00pm MWF
+Assignment Read Fear and Fables the guide to using mythology for control
+Assignment answer questions page 411 2-20 even 
+
+associated Darth Vader
+
+Course 2
+course title Software Engineering 
+8
+7
+jan 13, 2017
+12pm TT
+Assignment Finish project make it shiny
+
+
+__________________________________________________________________________
+EVENT 1
+
+Star Wars Release
+dec 15 2017
+remind me yes
+remind date dec 10 2017
+Desc Pick up Vader and Carl from the airport
+
+
+
+Event 2
+Vacation
+May 2 2017
+remind me yes
+remind date april 30 2017
+Desc Dont forget to pack
+
+Event 3
+
+take over the world
+jan 1 2030
+remind me yes
+remind date dec 31, 2029
+Desc dont forget tacos 
+
