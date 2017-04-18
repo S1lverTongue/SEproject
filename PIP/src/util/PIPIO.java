@@ -164,7 +164,7 @@ public class PIPIO {
         // set base directory for this file
         String typeDir = userDirectory;
         // set the filename based on obj id
-        String filename = Integer.toString(obj.getID()) + ".pip";
+        //String filename = Integer.toString(obj.getID()) + ".pip";
 
         // add the appropriate folder to the directory
         if (obj instanceof Note) {
@@ -182,9 +182,31 @@ public class PIPIO {
         return typeDir;
     }
 
+    private String getPathToEntity(PIPEntity obj) {
+        // set base directory for this file
+        String typeDir = userDirectory;
+        // set the filename based on obj id
+        String filename = Integer.toString(obj.getID()) + ".pip";
+
+        // add the appropriate folder to the directory
+        if (obj instanceof Note) {
+            typeDir += "Notes" + slash;
+        } else if (obj instanceof Course) {
+            typeDir += "Courses" + slash;
+        } else if (obj instanceof Contact) {
+            typeDir += "Contacts" + slash;
+        } else if (obj instanceof CalendarEvent) {
+            typeDir += "Events" + slash;
+        } else {
+            System.out.println("Object not saved: Type cannot be determined.");
+        }
+
+        return typeDir+filename;
+    }
+
     private void saveObject(PIPEntity obj) {
         // get path to object
-        String filename = getDirectoryToEntity(obj);
+        String filename = getPathToEntity(obj);
 
         // start writing the file
         FileOutputStream FOS = null;
