@@ -49,13 +49,6 @@ public class PIPIO {
         return results;
     }
 
-    public static ArrayList<Integer> loadUserIDs() {
-        ArrayList<Integer> temp = new ArrayList<Integer>();
-        for (String username : loadUsernames())
-            temp.add(loadUser(username).getId());
-        return temp;
-    }
-
     public static User loadUser(String username) {
         // path to user.puid file:
         String puidPath = getUserDirectory(username) + "user.puid";
@@ -104,7 +97,6 @@ public class PIPIO {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        user.disposeUserEnvironment();
         saveUser(user);
     }
 

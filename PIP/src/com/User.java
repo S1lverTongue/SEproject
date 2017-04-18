@@ -39,7 +39,6 @@ import java.util.*;
  *
  */
 public class User implements Serializable {
-    private int id;
     private String username;
 
     private PIPIO pipio;
@@ -56,24 +55,13 @@ public class User implements Serializable {
 
     public User(String _username) {
         username = _username;
-        notes = new ArrayList<Note>();
-        courses = new ArrayList<Course>();
-        contacts = new ArrayList<Contact>();
-        calendarEvents = new ArrayList<CalendarEvent>();
-        initializeSecretaries();
-
-        // generate and set a unique user id
-        do {
-            id = IDGenerator.getID();
-        } while(PIPIO.loadUserIDs().contains(id));
-
-        pipio = new PIPIO(username);
+        //notes = new ArrayList<Note>();
+        //courses = new ArrayList<Course>();
+        //contacts = new ArrayList<Contact>();
+        //calendarEvents = new ArrayList<CalendarEvent>();
+        //initializeSecretaries();
+        //pipio = new PIPIO(username);
     }
-
-    public int getId() {
-        return id;
-    }
-
 
     public String getUsername() {
         return username;
@@ -90,13 +78,11 @@ public class User implements Serializable {
 
     // Any code to be executed when the user logs out
     public void onLogout() {
-        saveData();
-
+        // saveData();
         // clear user environment then save user
         disposeUserEnvironment();
         PIPIO.saveUser(this);
     }
-
 
     // Load ArrayLists using PIPIO
     public void loadData() {
@@ -105,7 +91,6 @@ public class User implements Serializable {
         contacts = pipio.loadContacts();
         calendarEvents = pipio.loadCalendarEvents();
     }
-
 
     // Save ArrayLists using PIPIO
     public void saveData() {
@@ -150,8 +135,14 @@ public class User implements Serializable {
 
         // release pipio
         pipio = null;
-
     }
+
+
+    /////////////
+    //////////////////
+    // Everything below this point is for PIPEntity handling.
+    ////////////////////////
+    //////////////////////////////
 
 
     /*
@@ -220,5 +211,78 @@ public class User implements Serializable {
                 break;
             }
         pipio.deleteCalendarEvent(id);
+    }
+
+    //
+    //
+    // Secretary lookups
+    //
+    public String[] getNoteTags() {
+        return noteSec.getTags();
+    }
+
+    public String[] getCourseTags() {
+        return courseSec.getTags();
+    }
+
+    public String[] getContactTags() {
+        return contactSec.getTags();
+    }
+
+    public String[] getCalendarEventTags() {
+        return calendarEventsSec.getTags();
+    }
+
+    public PIPEntity getEntityById(int id) {
+        PIPEntity result1 = null;
+        PIPEntity result2 = null;
+        PIPEntity result3 = null;
+        PIPEntity result4 = null;
+
+        try {
+            result1 = noteSec.searchByID(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            result2 = courseSec.searchByID(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            result3 = contactSec.searchByID(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        try {
+            result4 = calendarEventsSec.searchByID(id);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        if (result1 != null) {
+            return result1;
+        } else if (result2 != null) {
+            return result2;
+        } else if (result3 != null) {
+            return result3;
+        } else if (result4 != null) {
+            return  result4;
+        } else {
+            return null;
+        }
+    }
+
+    public boolean idIsAvailable(int id) {
+        PIPEntity temp = null;
+        temp = getEntityById(id);
+
+        if (temp == null)
+            return true;
+        else
+            return false;
     }
 }
