@@ -60,14 +60,13 @@ public class Contact extends PIPEntity implements Serializable {
 	protected boolean isEmergency;
 	protected String description;
 	protected boolean isModified;
-	protected ArrayList<String> associatedTags;
+	protected String tag;
 	protected Linker associatedPIPEntities;
 	
 	// Constructor
 	public Contact() {
 		this.associatedEmails = new ArrayList<String>();
 		this.associatedPhoneNumbers = new ArrayList<String>();
-		this.associatedTags = new ArrayList<String>();
 		this.birthday = Date.from(Instant.now());
 		this.associatedPIPEntities = new Linker();
 	}
@@ -207,23 +206,13 @@ public class Contact extends PIPEntity implements Serializable {
 		return this.isModified;
 	}
 	
-	// adds a tag to this contact
-	public void addTag(String tag) {
-		this.associatedTags.add(tag);
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
-	// linear search to remove tag
-	public void removeTag(String tag) {
-		if (this.associatedTags.contains(tag)) {
-			this.associatedTags.remove(tag);
-		}
+	public String getTag() {
+		return this.tag;
 	}
-	
-	// returns an ArrayList of the associated tags
-	public ArrayList<String> getAssociatedTags() {
-		return this.associatedTags;
-	}
-	
 	// adds a link to the associated Linker object
 	public void addLink(String objectToBeLinked, int idToBeLinked) {
 		this.getAssociatedPIPEntities().addLink(objectToBeLinked, idToBeLinked);
@@ -251,7 +240,7 @@ public class Contact extends PIPEntity implements Serializable {
 		returnedString += "Company: " + this.getCompany() + "\n";
 		returnedString += "Association: " + this.getAssociation() + "\n";
 		returnedString += "Contact Description: " + this.getDescription() + "\n";
-		returnedString += "Tags: " + this.getAssociatedTags().toString() + "\n";
+		returnedString += "Tags: " + this.getTag() + " \n";
 		return returnedString;
 	}
 	public void setTitle() {

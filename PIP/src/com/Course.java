@@ -56,14 +56,13 @@ public class Course extends PIPEntity implements Serializable {
 	protected Date endDate;
 	protected Date meetingTime;
 	protected ArrayList<Assignment> assignments;
-	protected ArrayList<String> associatedTags;
+	protected String tag;
 	protected Linker associatedPIPEntities;
 	private boolean isModified;
 	
 	// Constructor. Possibly changing the dates later
 	public Course() {
 		this.associatedPIPEntities = new Linker();
-		this.associatedTags = new ArrayList<String>();
 		this.startDate = Date.from(Instant.now());
 		this.endDate = Date.from(Instant.now());
 		this.meetingTime = Date.from(Instant.now());
@@ -88,19 +87,6 @@ public class Course extends PIPEntity implements Serializable {
 	public String getTitle() {
 		return this.title;
 	}
-	
-	/*
-	// adds an event to this Course object
-	public void addEvent(CalendarEvent newEvent) {
-		this.eventIds.add(newEvent);
-	}
-	
-	// returns the list of CalendarEvents associated to this
-	// course object
-	public ArrayList<CalendarEvent> getAssociatedEventIds() {
-		return this.eventIds;
-	}
-	*/
 	
 	// sets how many skip days that this Course allows a
 	// participant
@@ -169,23 +155,13 @@ public class Course extends PIPEntity implements Serializable {
 		return this.assignments;
 	}
 	
-	// adds a tag to this course
-	public void addTag(String tag) {
-		this.associatedTags.add(tag);
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
-		
-	// linear search to remove tag
-	public void removeTag(String tag) {
-		if (this.associatedTags.contains(tag)) {
-			this.associatedTags.remove(tag);
-		}
+	
+	public String getTag() {
+		return this.tag;
 	}
-		
-	// returns an ArrayList of the associated tags
-	public ArrayList<String> getAssociatedTags() {
-		return this.associatedTags;
-	}
-		
 	
 	// adds a link to the linker associated with this course
 	public void addLink(String objectToBeLinkedTo, int idToBeLinkedTo) {

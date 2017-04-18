@@ -52,7 +52,7 @@ public class CalendarEvent extends PIPEntity implements Serializable {
 	protected boolean remindMe;
 	protected Date reminderDate;
 	protected String description;
-	protected ArrayList<String> associatedTags;
+	protected String tag;
 	private boolean isModified;
 	protected Linker associatedPIPEntities;
 	
@@ -60,7 +60,6 @@ public class CalendarEvent extends PIPEntity implements Serializable {
 	// later
 	public CalendarEvent() {
 		this.associatedPIPEntities = new Linker();
-		this.associatedTags = new ArrayList<String>();
 		this.date = Date.from(Instant.now());
 		this.reminderDate = Date.from(Instant.now());
 	}
@@ -147,22 +146,13 @@ public class CalendarEvent extends PIPEntity implements Serializable {
 		return this.associatedPIPEntities;
 	}
 	
-	// adds a tag to this contact
-	public void addTag(String tag) {
-		this.associatedTags.add(tag);
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
-		
-	// linear search to remove tag
-	public void removeTag(String tag) {
-		if (this.associatedTags.contains(tag)) {
-			this.associatedTags.remove(tag);
-		}
+	
+	public String getTag(String tag) {
+		return this.tag;
 	}
-		
-	// returns an ArrayList of the associated tags
-	public ArrayList<String> getAssociatedTags() {
-		return this.associatedTags;
-	}	
 	
 	// Sets whether this CalendarEvent has been modified
 	public void setModified(boolean modified) {

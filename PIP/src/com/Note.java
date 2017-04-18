@@ -52,14 +52,11 @@ public class Note extends PIPEntity implements Serializable {
 	//protected ArrayList<Contact> associatedContacts;
 	//protected ArrayList<CalendarEvent> associatedEvents;
 	protected boolean isModified;
-	protected ArrayList<String> associatedTags;
+	protected String tag;
 	protected Linker associatedPIPEntities;
 	
 	// Constructor
 	public Note() {
-		//this.associatedContacts = new ArrayList<Contact>();
-		//this.associatedEvents = new ArrayList<CalendarEvent>();
-		this.associatedTags = new ArrayList<String>();
 		this.associatedPIPEntities = new Linker();
 		this.dateCreated = new Date();
 		this.dateModded = new Date();
@@ -140,53 +137,6 @@ public class Note extends PIPEntity implements Serializable {
 		return this.associatedPIPEntities;
 	}
 	
-	/*
-	// adds an associated contact
-	public void addContact(Contact newContact) {
-		this.associatedContacts.add(newContact);
-	}
-	
-	// removes an associated contact with a linear search.
-	// may be changed later
-	public void removeContact(Contact removeContact) {
-		ListIterator<Contact> contactListIterator = this.associatedContacts.listIterator();
-		while (contactListIterator.hasNext()) {
-			Contact comparator = contactListIterator.next();
-			if (comparator.getID() == removeContact.getID()) {
-				this.associatedContacts.remove(comparator);
-				break;
-			}
-		}
-	}
-	
-	// retrieves the list of associated contacts
-	public ArrayList<Contact> getAssociatedContacts() {
-		return this.associatedContacts;
-	}
-	
-	// adds an associated event
-	public void addEvent(CalendarEvent event) {
-		this.associatedEvents.add(event);
-	}
-	
-	// removes an event
-	public void removeEvent(CalendarEvent event) {
-		ListIterator<CalendarEvent> calendarEventListIterator = this.associatedEvents.listIterator();
-		while (calendarEventListIterator.hasNext()) {
-			CalendarEvent comparator = calendarEventListIterator.next();
-			if (comparator.getID() == event.getID()) {
-				this.associatedContacts.remove(comparator);
-				break;
-			}
-		}
-	}
-	
-	// gets the list of associated events
-	public ArrayList<CalendarEvent> getAssociatedEvents() {
-		return this.associatedEvents;
-	}
-	*/
-	
 	// sets modified
 	public void setModified(boolean modified) {
 		this.isModified = modified;
@@ -197,22 +147,12 @@ public class Note extends PIPEntity implements Serializable {
 		return this.isModified;
 	}
 	
-	// adds an associated tag
-	public void addTag(String tag) {
-		this.associatedTags.add(tag);
+	public void setTag(String tag) {
+		this.tag = tag;
 	}
 	
-	// removes a tag from associated tags
-	// subject to change
-	public void removeTag(String removedTag) {
-		if (this.associatedTags.contains(removedTag)) {
-			this.associatedTags.remove(removedTag);
-		}
-	}
-	
-	// gets the list of associated tags
-	public ArrayList<String> getAssociatedTags() {
-		return this.associatedTags;
+	public String getTag() {
+		return this.tag;
 	}
 	
 	public String toString() {
@@ -220,7 +160,7 @@ public class Note extends PIPEntity implements Serializable {
 		returnedString += "Title: " + this.getTitle() + "\n";
 		returnedString += "Date Created: " + this.getDateCreated().toString() + "\n";
 		returnedString += "Last Modified: " + this.getDateModded().toString() + "\n";
-		returnedString += "Tags: " + this.getAssociatedTags().toString() + "\n";
+		returnedString += "Tag: " + this.getTag() + "\n";
 		returnedString += "Description: " + this.getBody() + "\n";
 		return returnedString;
 	}
