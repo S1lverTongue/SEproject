@@ -10,9 +10,10 @@
 
 package util;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Linker {
+public class Linker implements Serializable {
 	
 	/*
 	 * Interface block:
@@ -34,7 +35,11 @@ public class Linker {
  // private int idCour;
  // private int idNote;
   
-  private ArrayList<Integer> contactIds;
+  /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4185349939767314107L;
+private ArrayList<Integer> contactIds;
   private ArrayList<Integer> eventIds;
   private ArrayList<Integer> courseIds;
   private ArrayList<Integer> noteIds;

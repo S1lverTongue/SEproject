@@ -24,7 +24,6 @@ public class PIPSkeleton extends JFrame {
 	
 	public PIPSkeleton(User loggedInUser) {
 		this.loggedInUser = loggedInUser;
-		System.out.println(this.loggedInUser.toString());
 		curr = this;
 		this.d = (Toolkit.getDefaultToolkit().getScreenSize());
 		setSize(d);
@@ -67,7 +66,6 @@ public class PIPSkeleton extends JFrame {
 			public void componentResized(ComponentEvent arg0) {
 				// TODO Auto-generated method stub
 				d = curr.getSize();
-				System.out.println("Width: " + d.getWidth() + " :: Height: " + d.getHeight());
 				views.setSize(d);
 				home.resize(d);
 				notes.resize(d);
@@ -86,13 +84,9 @@ public class PIPSkeleton extends JFrame {
 		});
 	}
 	
-	public JTabbedPane getViews() {
-		return this.views;
-	}
-	
 	public void initComponents() {
-		home = new NewMainView(views.getSize());
-		notes = new NotesView(views.getSize());
+		home = new NewMainView(loggedInUser, views.getSize());
+		notes = new NotesView(loggedInUser, views.getSize());
 		courses = new CoursesView(views.getSize());
 		contacts = new ContactsView(views.getSize());
 		events = new EventsView(views.getSize());

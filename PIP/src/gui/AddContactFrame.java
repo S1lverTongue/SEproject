@@ -39,6 +39,7 @@ public class AddContactFrame extends JFrame {
 	private String mode;
 	
 	private ArrayList<Contact> contactCollectionToAddTo;
+	private Contact editingContact;
 	
 	public AddContactFrame(ArrayList<Contact> contactCollection) {
 		setTitle("Add Contact");
@@ -178,6 +179,7 @@ public class AddContactFrame extends JFrame {
 	
 	public void editSelected(Contact con) {
 		if (mode.equals("edit")) {
+			this.editingContact = con;
 			populateFields(con);
 			makeNotEditable(true);
 		} else if (mode.equals("detail")) {

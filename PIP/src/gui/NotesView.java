@@ -1,15 +1,30 @@
 package gui;
 
+import com.User;
+import com.Note;
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 public class NotesView extends JPanel {
+	private User loggedInUser;
 	private JTextField noteSearch;
 	private JScrollPane noteList;
 	private JTextPane noteView;
@@ -18,12 +33,18 @@ public class NotesView extends JPanel {
 	private JButton deleteNote;
 	private JButton editNote;
 	private JButton detailedNote;
+	private JList jListOfNotes;
+	private DefaultListModel noteModel;
+	private ListSelectionModel selectionModel;
 	private Dimension parentWindowSize;
+	private ArrayList<Note> userNotes;
 	private int WIDTH;
 	private int HEIGHT;
 	
-	public NotesView(Dimension d) {
+	public NotesView(User loggedIn, Dimension d) {
 		this.parentWindowSize = d;
+		this.loggedInUser = loggedIn;
+		this.userNotes = this.loggedInUser.getNotes();
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 		
@@ -42,13 +63,68 @@ public class NotesView extends JPanel {
 		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
 		
+		noteView = new JTextPane();
+		
 		noteSearch = new JTextField();
 		noteSearch.setText("Search");
 		searchNotes = new JButton("Search");
-		noteList = new JScrollPane();
+		
+		jListOfNotes = new JList();
+		noteModel = new DefaultListModel();
+		for (int i = 0; i < userNotes.size(); i++) {
+			noteModel.add(i, userNotes.get(i).getTitle());
+		}
+		jListOfNotes.setModel(noteModel);
+		selectionModel = jListOfNotes.getSelectionModel();
+		selectionModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent e) {
+				// TODO Auto-generated method stub
+				noteView.setText(loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()).toString());
+			}
+			
+		});
+		jListOfNotes.setVisible(true);
+		noteList = new JScrollPane(jListOfNotes);
 		noteList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-		noteView = new JTextPane();
 		addNote = new JButton("Add");
+		addNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int noteListLength = loggedInUser.getNotes().size();
+				AddNoteFrame newNoteFrame = new AddNoteFrame(loggedInUser);
+				newNoteFrame.addWindowListener(new WindowListener() {
+
+					@Override
+					public void windowActivated(WindowEvent arg0) {}
+
+					@Override
+					public void windowClosed(WindowEvent arg0) {
+						// TODO Auto-generated method stub
+						if (loggedInUser.getNotes().size() > noteListLength) {
+							noteModel.add(noteListLength, loggedInUser.getNotes().get(noteListLength).getTitle());
+						}
+					}
+
+					@Override
+					public void windowClosing(WindowEvent arg0) {}
+
+					@Override
+					public void windowDeactivated(WindowEvent arg0) {}
+
+					@Override
+					public void windowDeiconified(WindowEvent arg0) {}
+
+					@Override
+					public void windowIconified(WindowEvent arg0) {}
+
+					@Override
+					public void windowOpened(WindowEvent arg0) {}
+					
+				});
+			}
+		});
+		
 		deleteNote = new JButton("Delete");
 		editNote = new JButton("Edit");
 		detailedNote = new JButton("Detailed");
@@ -72,4 +148,5 @@ public class NotesView extends JPanel {
 		HEIGHT = (int) Math.ceil(d.getHeight());
 		setSizes();
 	}
+	
 }

@@ -1,5 +1,6 @@
 package gui;
 
+import com.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
@@ -7,7 +8,9 @@ import javax.swing.ScrollPaneConstants;
 import java.awt.Color;
 import java.awt.Dimension;
 
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JList;
 
 public class NewMainView extends JPanel {
 	private JScrollPane upcomingAssignments;
@@ -15,11 +18,14 @@ public class NewMainView extends JPanel {
 	private JScrollPane detailView;
 	private JButton skip;
 	private Dimension parentWindowSize;
+	private User loggedInUser;
 	private int WIDTH;
 	private int HEIGHT;
 	
-	public NewMainView(Dimension d) {
+	public NewMainView(User loggedIn, Dimension d) {
 		this.parentWindowSize = d;
+		this.loggedInUser = loggedIn;
+		this.loggedInUser.onLogin();
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 		
@@ -35,8 +41,18 @@ public class NewMainView extends JPanel {
 		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
 		
-		upcomingAssignments = new JScrollPane();
-		
+		JList assignmentList = new JList();
+		DefaultListModel dlm = new DefaultListModel();
+		for (int i = 0; i < loggedInUser.getCourses().size(); i++) {
+			Course curr = loggedInUser.getCourses().get(i);
+			for (int currAssignmentIndex = 0; currAssignmentIndex < curr.getAssignments().size(); currAssignmentIndex++) {
+				Assignment currAssignment = curr.getAssignments().get(currAssignmentIndex);
+				dlm.addElement(curr.getTitle());
+			}
+		}
+		assignmentList.setModel(dlm);
+		assignmentList.setVisible(true);;
+		upcomingAssignments = new JScrollPane(assignmentList);
 		componentView = new JTextPane();
 		
 		detailView = new JScrollPane();
