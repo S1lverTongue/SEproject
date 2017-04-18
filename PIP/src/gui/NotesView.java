@@ -4,43 +4,72 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Dimension;
+import javax.swing.JTextPane;
+import javax.swing.ScrollPaneConstants;
 
 public class NotesView extends JPanel {
 	private JTextField noteSearch;
-	private JTextField noteView;
-	public NotesView() {
+	private JScrollPane noteList;
+	private JTextPane noteView;
+	private JButton searchNotes;
+	private JButton addNote;
+	private JButton deleteNote;
+	private JButton editNote;
+	private JButton detailedNote;
+	private Dimension parentWindowSize;
+	private int WIDTH;
+	private int HEIGHT;
+	
+	public NotesView(Dimension d) {
+		this.parentWindowSize = d;
+		setBackground(Color.DARK_GRAY);
 		setLayout(null);
 		
-		noteSearch = new JTextField();
-		noteSearch.setBounds(10, 11, 120, 20);
+		initComponents();
 		add(noteSearch);
-		noteSearch.setColumns(10);
-		
-		JScrollPane noteList = new JScrollPane();
-		noteList.setBounds(10, 46, 200, 203);
+		add(searchNotes);
 		add(noteList);
-		
-		JButton addNote = new JButton("Add");
-		addNote.setBounds(10, 266, 89, 23);
 		add(addNote);
-		
-		JButton deleteNote = new JButton("Delete");
-		deleteNote.setBounds(121, 266, 89, 23);
 		add(deleteNote);
-		
-		noteView = new JTextField();
-		noteView.setBounds(240, 46, 200, 203);
-		add(noteView);
-		noteView.setColumns(10);
-		
-		JButton editNote = new JButton("Edit");
-		editNote.setBounds(250, 266, 89, 23);
 		add(editNote);
-		
-		JButton detailedNote = new JButton("Detailed");
-		detailedNote.setBounds(351, 266, 89, 23);
 		add(detailedNote);
+		add(noteView);
+	}
+	
+	public void initComponents() {
+		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
+		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
+		
+		noteSearch = new JTextField();
+		noteSearch.setText("Search");
+		searchNotes = new JButton("Search");
+		noteList = new JScrollPane();
+		noteList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		noteView = new JTextPane();
+		addNote = new JButton("Add");
+		deleteNote = new JButton("Delete");
+		editNote = new JButton("Edit");
+		detailedNote = new JButton("Detailed");
+		
+		setSizes();
+	}
+	
+	public void setSizes() {
+		noteSearch.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 5, (WIDTH / 100) * 20, 20);
+		searchNotes.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 5, (WIDTH / 100) * 15, 20);
+		noteList.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
+		noteView.setBounds((WIDTH / 100) * 55, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
+		addNote.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);
+		deleteNote.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);
+		editNote.setBounds((WIDTH / 100) * 55, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);
+		detailedNote.setBounds((WIDTH / 100) * 80, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);
+	}
+	
+	public void resize(Dimension d) {
+		WIDTH = (int) Math.ceil(d.getWidth());
+		HEIGHT = (int) Math.ceil(d.getHeight());
+		setSizes();
 	}
 }

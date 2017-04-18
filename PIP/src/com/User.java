@@ -2,7 +2,7 @@ package com;
 
 import util.IDGenerator;
 import util.PIPIO;
-import util.Secretary;
+import util.*;
 
 import java.io.Serializable;
 import java.util.*;
@@ -49,10 +49,10 @@ public class User implements Serializable {
     private ArrayList<Contact> contacts;
     private ArrayList<CalendarEvent> calendarEvents;
 
-    private Secretary noteSec;
-    private Secretary courseSec;
-    private Secretary contactSec;
-    private Secretary calendarEventsSec;
+    private NoteSecretary noteSec;
+    private CourseSecretary courseSec;
+    private ContactSecretary contactSec;
+    private EventSecretary calendarEventsSec;
 
     public User(String _username) {
         username = _username;
@@ -68,7 +68,6 @@ public class User implements Serializable {
         } while(PIPIO.loadUserIDs().contains(id));
 
         pipio = new PIPIO(username);
-        initializeSecretaries();
     }
 
     public int getId() {
@@ -117,15 +116,15 @@ public class User implements Serializable {
     }
 
     public void initializeSecretaries() {
-        noteSec = new Secretary();
-        courseSec = new Secretary();
-        contactSec = new Secretary();
-        calendarEventsSec = new Secretary();
+        noteSec = new NoteSecretary();
+        courseSec = new CourseSecretary();
+        contactSec = new ContactSecretary();
+        calendarEventsSec = new EventSecretary();
 
         noteSec.yesMrClintonNotes(notes);
         courseSec.yesMrClintonCourses(courses);
-        contactSec.yesMrClintonContacts(contacts);
-        calendarEventsSec.yesMrClintonCalendarEvents(calendarEvents);
+        contactSec.yesMrClinton(contacts);
+        calendarEventsSec.yesMrClinton(calendarEvents);
     }
 
     // ** USE ONLY ON LOGOUT **
@@ -186,7 +185,7 @@ public class User implements Serializable {
     public void deleteNote(int id) {
         for (Note note : notes)
             if (note.getID() == id) {
-                noteSec.deleteFile(note.getTag(), id);
+                noteSec.deleteFile(note.getTag(), id, note.getTitle());
                 notes.remove(note);
                 break;
             }
@@ -196,7 +195,7 @@ public class User implements Serializable {
     public void deleteCourse(int id) {
         for (Course course : courses)
             if (course.getID() == id) {
-                courseSec.deleteFile(course.getTag(), id);
+                courseSec.deleteFile(course.getTag(), id, course.getTitle());
                 courses.remove(course);
                 break;
             }
@@ -206,7 +205,7 @@ public class User implements Serializable {
     public void deleteContact(int id) {
         for (Contact contact : contacts)
             if (contact.getID() == id) {
-                contactSec.deleteFile(contact.getTag(), id);
+                contactSec.deleteFile(contact.getTag(), id, contact.getTitle());
                 contacts.remove(contact);
                 break;
             }
@@ -216,7 +215,7 @@ public class User implements Serializable {
     public void deleteCalendarEvent(int id) {
         for (CalendarEvent event : calendarEvents)
             if (event.getID() == id) {
-                calendarEventsSec.deleteFile(event.getTag(), id);
+                calendarEventsSec.deleteFile(event.getTag(), id, event.getTitle());
                 calendarEvents.remove(event);
                 break;
             }

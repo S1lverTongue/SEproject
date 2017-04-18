@@ -8,6 +8,7 @@ public class EventSecretary {
 	private int name =  0;
 	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	private TreeMap<String, ArrayList> index = new TreeMap<String, ArrayList>();
+	private TreeMap<Integer, String> IDLookup = new TreeMap<Integer, String>();
 	
 	/*
 	 *add takes the CalendarEvent and gets the tag if there is already a tag 
@@ -19,6 +20,7 @@ public class EventSecretary {
 		tag = t;
 		name = n;
 		addToIndex(title, t, n);
+		IDLookup.put(n, tag);
 		if (cabinet.containsKey(tag)) {
 			TreeMap<Integer , CalendarEvent> tempMap = cabinet.get(tag);
 			tempMap.put(name, o);
@@ -127,6 +129,16 @@ public class EventSecretary {
 		} else {
 			temp.setTitle("FILE NOT FOUND");
 		}
+		return temp;
+	}
+	
+	/*
+	 * SearchByID finds the ID and gets the tag from a map and then returns
+	 * the object back to the caller 
+	 */
+	public CalendarEvent searchByID(int ID) {
+		String tag = IDLookup.get(ID);
+		CalendarEvent temp = getFile(tag, ID);
 		return temp;
 	}
 

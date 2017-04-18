@@ -8,9 +8,10 @@ public class CourseSecretary {
 	private int name =  0;
 	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	private TreeMap<String, ArrayList> index = new TreeMap<String, ArrayList>();
+	private TreeMap<Integer, String> IDLookup = new TreeMap<Integer, String>();
 	
 	/*
-	 *add takes the object and gets the tag if there is already a tag 
+	 *add takes the Course and gets the tag if there is already a tag 
 	 * for that type of object adds it to that row otherwise it creates
 	 * new row and puts it into it.
 	 */
@@ -19,6 +20,7 @@ public class CourseSecretary {
 		tag = t;
 		name = n;
 		addToIndex(title, t, n);
+		IDLookup.put(n, tag);
 		if (cabinet.containsKey(tag)) {
 			TreeMap<Integer , Course> tempMap = cabinet.get(tag);
 			tempMap.put(name, o);
@@ -29,6 +31,8 @@ public class CourseSecretary {
 			cabinet.put(tag,  row);
 		}//close if
 	}//close add
+	
+	
 	/*
 	 * gets all the tags that exist and
 	 * returns them in the form of an
@@ -51,6 +55,7 @@ public class CourseSecretary {
 		String[] arr = s.toArray(new String[s.size()]);
 		return arr;
 	}
+	
 	/*
 	 * deletes the object from the row
 	 */
@@ -75,6 +80,7 @@ public class CourseSecretary {
 		}
 		cabinet.remove(tag);
 	}
+	
 	/*
 	 * gets the object and returns it
 	 */
@@ -125,7 +131,17 @@ public class CourseSecretary {
 		}
 		return temp;
 	}
-
+	
+	/*
+	 * SearchByID finds the ID and gets the tag from a map and then returns
+	 * the object back to the caller 
+	 */
+	public Course searchByID(int ID) {
+		String tag = IDLookup.get(ID);
+		Course temp = getFile(tag, ID);
+		return temp;
+	}
+	
 	/*
 	 * adds to the index the name of the object as a key and
 	 * an arraylist of 2 that contains the tag and ID that is needed to 

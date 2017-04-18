@@ -8,6 +8,7 @@ public class NoteSecretary {
 	private int name =  0;
 	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();
 	private TreeMap<String, ArrayList> index = new TreeMap<String, ArrayList>();
+	private TreeMap<Integer, String> IDLookup = new TreeMap<Integer, String>();
 	
 	/*
 	 *add takes the Note and gets the tag if there is already a tag 
@@ -19,6 +20,7 @@ public class NoteSecretary {
 		tag = t;
 		name = n;
 		addToIndex(title, t, n);
+		IDLookup.put(n, tag);
 		if (cabinet.containsKey(tag)) {
 			TreeMap<Integer , Note> tempMap = cabinet.get(tag);
 			tempMap.put(name, o);
@@ -111,11 +113,12 @@ public class NoteSecretary {
 			add(blueDress, cut, book);
 		}
 	}	
+	
 	/*
 	 * SearchFor searches for an item and returns it used for each of the menus
 	 * it creates a new PIPEntity and then if the title exist loads it into the 
 	 */
-	public Note searchFor (String title) {
+	public Note searchByName (String title) {
 		Note temp = new Note();
 		ArrayList arrL = new ArrayList();
 		if (index.containsKey(title)) {
@@ -129,6 +132,16 @@ public class NoteSecretary {
 		return temp;
 	}
 
+	/*
+	 * SearchByID finds the ID and gets the tag from a map and then returns
+	 * the object back to the caller 
+	 */
+	public Note searchByID(int ID) {
+		String tag = IDLookup.get(ID);
+		Note temp = getFile(tag, ID);
+		return temp;
+	}
+	
 	/*
 	 * adds to the index the name of the object as a key and
 	 * an arraylist of 2 that contains the tag and ID that is needed to 

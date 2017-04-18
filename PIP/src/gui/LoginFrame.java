@@ -81,7 +81,7 @@ public class LoginFrame extends JFrame {
 				if (userList.getSelectedIndex() != -1 ) {
 					String username = PIPIO.loadUsernames().get(userList.getSelectedIndex());
 					User currentUser = PIPIO.loadUser(username);
-					PIPStart.changeWindow(new PIPSkeleton());
+					PIPStart.changeWindow(new PIPSkeleton(currentUser));
 					dispose();
 				}
 			}
