@@ -301,4 +301,34 @@ public class User implements Serializable {
     public ArrayList<CalendarEvent> getCalendarEvents() {
         return calendarEvents;
     }
+
+    public ArrayList<PIPEntity> searchByTitle(String title) {
+        ArrayList<PIPEntity> result = new ArrayList<PIPEntity>();
+
+        for (Note note : notes) {
+            if (title.equals(note.getTitle())) {
+                result.add(note);
+            }
+        }
+
+        for (Course course : courses) {
+            if (title.equals(course.getTitle())) {
+                result.add(course);
+            }
+        }
+
+        for (Contact contact : contacts) {
+            if (title.equals(contact.getTitle())) {
+                result.add(contact);
+            }
+        }
+
+        for (CalendarEvent event : calendarEvents) {
+            if (title.equals(event.getTitle())) {
+                result.add(event);
+            }
+        }
+
+        return result;
+    }
 }
