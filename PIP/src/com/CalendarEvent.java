@@ -150,7 +150,7 @@ public class CalendarEvent extends PIPEntity implements Serializable {
 		this.tag = tag;
 	}
 	
-	public String getTag(String tag) {
+	public String getTag() {
 		return this.tag;
 	}
 	

@@ -62,6 +62,7 @@ public class Course extends PIPEntity implements Serializable {
 	
 	// Constructor. Possibly changing the dates later
 	public Course() {
+		this.assignments = new ArrayList<Assignment>();
 		this.associatedPIPEntities = new Linker();
 		this.startDate = Date.from(Instant.now());
 		this.endDate = Date.from(Instant.now());

@@ -1,8 +1,15 @@
 package gui;
 
+import com.User;
+
+import util.IDGenerator;
+import util.Filter;
+
 import com.CalendarEvent;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,17 +19,21 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 
 public class AddCalendarEventFrame extends JFrame {
+	private CalendarEvent newEvent;
+	private User loggedInUser;
 	private int WIDTH;
 	private int HEIGHT;
 	private JLabel eventTitleLabel;
 	private JLabel dateLabel;
 	private JLabel reminderLabel;
 	private JLabel descriptionLabel;
+	private JLabel tagLabel;
 	private JTextField eventTitleField;
 	private JTextField dateDayField;
 	private JTextField dateMonthField;
 	private JTextField dateYearField;
 	private JTextField reminderField;
+	private JTextField tagField;
 	private JTextArea descriptionField;
 	private JButton linkButton;
 	private JButton addButton;
@@ -32,13 +43,14 @@ public class AddCalendarEventFrame extends JFrame {
 	
 	private ArrayList<CalendarEvent> eventCollectionToAddTo;
 	
-	public AddCalendarEventFrame(ArrayList<CalendarEvent> eventCollection) {
+	public AddCalendarEventFrame(User loggedIn) {
+		this.loggedInUser = loggedIn;
 		setTitle("Add CalendarEvent");
 		setLayout(null);
 		
 		this.mode = "add";
 		
-		this.eventCollectionToAddTo = eventCollection;
+		this.eventCollectionToAddTo = this.loggedInUser.getCalendarEvents();
 		WIDTH = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 		HEIGHT = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		WIDTH = WIDTH / 2;
@@ -57,11 +69,13 @@ public class AddCalendarEventFrame extends JFrame {
 		add(reminderField);
 		add(descriptionLabel);
 		add(descriptionField);
+		add(tagLabel);
+		add(tagField);
 		add(linkButton);
 		add(addButton);
 		
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	private void initComponents() {
@@ -81,9 +95,50 @@ public class AddCalendarEventFrame extends JFrame {
 		descriptionField.setLineWrap(true);
 		descriptionField.setWrapStyleWord(true);
 		
+		tagLabel = new JLabel("Tag:");
+		tagField = new JTextField();
+		
 		linkButton = new JButton("Link");
 		addButton = new JButton("Add");
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (checkFields()) {
+					newEvent = new CalendarEvent();
+					newEvent.setID(IDGenerator.getID());
+					newEvent.setTitle(eventTitleField.getText());
+					newEvent.setDate(Filter.getDate(dateMonthField.getText(), dateDayField.getText(), dateYearField.getText()));
+					newEvent.setModified(true);
+					newEvent.setDescription(descriptionField.getText());
+					if (Filter.isEmerg(reminderField.getText())) {
+						newEvent.setRemindMe(true);
+					} else {
+						newEvent.setRemindMe(false);
+					}
+					newEvent.setTag(tagField.getText());
+					loggedInUser.newCalendarEvent(newEvent);
+					dispose();
+				}
+			}
+		});
 		editButton = new JButton("Edit");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (checkFields()) {
+					newEvent.setTitle(eventTitleField.getText());
+					newEvent.setDate(Filter.getDate(dateMonthField.getText(), dateDayField.getText(), dateYearField.getText()));
+					newEvent.setModified(true);
+					newEvent.setDescription(descriptionField.getText());
+					if (Filter.isEmerg(reminderField.getText())) {
+						newEvent.setRemindMe(true);
+					} else {
+						newEvent.setRemindMe(false);
+					}
+					newEvent.setTag(tagField.getText());
+					loggedInUser.newCalendarEvent(newEvent);
+					dispose();
+				}
+			}
+		});
 		
 		setSizes();
 	}
@@ -103,12 +158,15 @@ public class AddCalendarEventFrame extends JFrame {
 		descriptionLabel.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 40, (WIDTH / 100) * 20, 20);
 		descriptionField.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 45, (WIDTH / 100) * 85, (HEIGHT / 100) * 40);
 		
+		tagLabel.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 90, (WIDTH / 100) * 10, 20);
+		tagField.setBounds((WIDTH / 100) * 20, (HEIGHT / 100) * 90, (WIDTH / 100) * 10, 20);
 		linkButton.setBounds((WIDTH / 100) * 45, (HEIGHT / 100) * 90, (WIDTH / 100) * 25, 20);
 		addButton.setBounds((WIDTH / 100) * 75, (HEIGHT / 100) * 90, (WIDTH / 100) * 25, 20);
 		editButton.setBounds(addButton.getBounds());
 	}
 	
 	private void populateFields(CalendarEvent cal) {
+		newEvent = cal;
 		eventTitleField.setText(cal.getTitle());
 		dateDayField.setText("" + cal.getDate().getDay());
 		dateMonthField.setText("" + cal.getDate().getMonth());
@@ -162,7 +220,11 @@ public class AddCalendarEventFrame extends JFrame {
 		}
 	}
 	
-	public static void main(String[] args) {
-		AddCalendarEventFrame x = new AddCalendarEventFrame(new ArrayList<CalendarEvent>());
+	private boolean checkFields() {
+		if (!eventTitleField.getText().equals("") && Filter.isNumOnly(dateDayField.getText()) && Filter.isNumOnly(dateMonthField.getText()) && Filter.isNumOnly(dateYearField.getText())) {
+			return true;
+		} else {
+			return false;
+		}
 	}
 }

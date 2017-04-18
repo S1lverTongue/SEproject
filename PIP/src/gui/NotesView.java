@@ -81,7 +81,10 @@ public class NotesView extends JPanel {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				// TODO Auto-generated method stub
-				noteView.setText(loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()).toString());
+				if (jListOfNotes.getSelectedIndex() != -1)
+					noteView.setText(loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()).toString());
+				else
+					noteView.setText("");
 			}
 			
 		});
@@ -126,8 +129,58 @@ public class NotesView extends JPanel {
 		});
 		
 		deleteNote = new JButton("Delete");
+		deleteNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (jListOfNotes.getSelectedIndex() != -1) {
+					loggedInUser.deleteNote(loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()).getID());
+					noteModel.remove(jListOfNotes.getSelectedIndex());
+				}
+			}
+		});
 		editNote = new JButton("Edit");
+		editNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (jListOfNotes.getSelectedIndex() != -1) {
+					EditNoteFrame editFrame = new EditNoteFrame(loggedInUser, loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()));
+					editFrame.addWindowListener(new WindowListener() {
+
+						@Override
+						public void windowActivated(WindowEvent arg0) {}
+
+						@Override
+						public void windowClosed(WindowEvent arg0) {
+							// TODO Auto-generated method stub
+							
+							
+						}
+
+						@Override
+						public void windowClosing(WindowEvent arg0) {}
+
+						@Override
+						public void windowDeactivated(WindowEvent arg0) {}
+
+						@Override
+						public void windowDeiconified(WindowEvent arg0) {}
+
+						@Override
+						public void windowIconified(WindowEvent arg0) {}
+
+						@Override
+						public void windowOpened(WindowEvent arg0){}
+						
+					});
+				}
+			}
+		});
 		detailedNote = new JButton("Detailed");
+		detailedNote.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (jListOfNotes.getSelectedIndex() != -1) {
+					DetailedNoteFrame detailedNoteView = new DetailedNoteFrame(loggedInUser, loggedInUser.getNotes().get(jListOfNotes.getSelectedIndex()));
+				}
+			}
+		});
 		
 		setSizes();
 	}

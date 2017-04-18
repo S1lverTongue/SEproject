@@ -5,6 +5,8 @@ package gui;
  * and open the template in the editor.
  */
 
+import java.awt.Toolkit;
+
 /**
  *
  * @author Pistol-King
@@ -15,6 +17,7 @@ public class Link_Me_Up_Scotty extends javax.swing.JFrame {
      * Creates new form Link_Me_Up_Scotty
      */
     public Link_Me_Up_Scotty() {
+    	setSize(Toolkit.getDefaultToolkit().getScreenSize());
         initComponents();
     }
 
@@ -64,19 +67,19 @@ public class Link_Me_Up_Scotty extends javax.swing.JFrame {
                     .addComponent(Link_button, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(course_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(course_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().width / 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(course_scroll_label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(event_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(event_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE,  Toolkit.getDefaultToolkit().getScreenSize().width / 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contact_scroll_label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(note_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(note_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().width / 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(note_scroll_label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(event_scroll_label, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(event_scroll_label, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().width / 4, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(contact_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
@@ -89,7 +92,7 @@ public class Link_Me_Up_Scotty extends javax.swing.JFrame {
                         .addGap(20, 20, 20)
                         .addComponent(course_scroll_label)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(course_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(course_link_scroll, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().height / 8, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -98,15 +101,15 @@ public class Link_Me_Up_Scotty extends javax.swing.JFrame {
                             .addComponent(contact_scroll_label))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(event_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(note_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(contact_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(event_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().height / 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(note_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().height / 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(contact_link_scroll, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, Toolkit.getDefaultToolkit().getScreenSize().height / 8, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
                 .addComponent(Link_button, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        pack();
+        //pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void Link_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Link_buttonActionPerformed

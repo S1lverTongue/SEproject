@@ -87,9 +87,9 @@ public class PIPSkeleton extends JFrame {
 	public void initComponents() {
 		home = new NewMainView(loggedInUser, views.getSize());
 		notes = new NotesView(loggedInUser, views.getSize());
-		courses = new CoursesView(views.getSize());
-		contacts = new ContactsView(views.getSize());
-		events = new EventsView(views.getSize());
-		search = new SearchView(views.getSize());
+		courses = new CoursesView(loggedInUser, views.getSize());
+		contacts = new ContactsView(loggedInUser, views.getSize());
+		events = new EventsView(loggedInUser, views.getSize());
+		search = new SearchView(loggedInUser, views.getSize());
 	}
 }

@@ -1,8 +1,15 @@
 package gui;
 
+import com.Course;
+import com.User;
+
+import util.Filter;
+
 import com.Assignment;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -12,6 +19,8 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 
 public class AddAssignmentFrame extends JFrame {
+	private User loggedInUser;
+	private Course cor;
 	private int WIDTH;
 	private int HEIGHT;
 	private JLabel eventTitleLabel;
@@ -32,13 +41,15 @@ public class AddAssignmentFrame extends JFrame {
 	
 	private ArrayList<Assignment> eventCollectionToAddTo;
 	
-	public AddAssignmentFrame(ArrayList<Assignment> eventCollection) {
+	public AddAssignmentFrame(User loggedIn, Course cor, ArrayList<Assignment> assignmentCollection) {
+		this.loggedInUser = loggedIn;
+		this.cor = cor;
 		setTitle("Add CalendarEvent");
 		setLayout(null);
 		
 		this.mode = "add";
 		
-		this.eventCollectionToAddTo = eventCollection;
+		this.eventCollectionToAddTo = assignmentCollection;
 		WIDTH = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 		HEIGHT = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		WIDTH = WIDTH / 2;
@@ -61,7 +72,7 @@ public class AddAssignmentFrame extends JFrame {
 		add(addButton);
 		
 		setVisible(true);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 	}
 	
 	private void initComponents() {
@@ -83,7 +94,27 @@ public class AddAssignmentFrame extends JFrame {
 		
 		linkButton = new JButton("Link");
 		addButton = new JButton("Add");
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				Assignment newAssignment = new Assignment();
+				newAssignment.setTitle(eventTitleField.getText());
+				newAssignment.setDescription(descriptionField.getText());
+				if (Filter.isEmerg(reminderField.getText())) {
+					newAssignment.setRemindMe(true);
+				} else {
+					newAssignment.setRemindMe(false);
+				}
+				cor.addAssignment(newAssignment);
+				loggedInUser.newCourse(cor);
+				dispose();
+			}
+		});
 		editButton = new JButton("Edit");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				
+			}
+		});
 		
 		setSizes();
 	}
@@ -160,9 +191,5 @@ public class AddAssignmentFrame extends JFrame {
 			reminderField.setEditable(true);
 			descriptionField.setEditable(true);
 		}
-	}
-	
-	public static void main(String[] args) {
-		AddAssignmentFrame x = new AddAssignmentFrame(new ArrayList<Assignment>());
 	}
 }

@@ -4,6 +4,7 @@ import com.*;
 import java.util.*;
 
 public class Secretary {
+	
 	private String tag = "";
 	private int name =  0;
 	private TreeMap<String, TreeMap> cabinet = new TreeMap<String, TreeMap>();

@@ -45,10 +45,12 @@ public class NewMainView extends JPanel {
 		DefaultListModel dlm = new DefaultListModel();
 		for (int i = 0; i < loggedInUser.getCourses().size(); i++) {
 			Course curr = loggedInUser.getCourses().get(i);
-			for (int currAssignmentIndex = 0; currAssignmentIndex < curr.getAssignments().size(); currAssignmentIndex++) {
-				Assignment currAssignment = curr.getAssignments().get(currAssignmentIndex);
-				dlm.addElement(curr.getTitle());
+			if (curr.getAssignments() != null) {
+				for (int assignmentIndex = 0; assignmentIndex < curr.getAssignments().size(); assignmentIndex++) {
+					dlm.addElement(curr.getAssignments().get(assignmentIndex).getTitle());
+				}
 			}
+			
 		}
 		assignmentList.setModel(dlm);
 		assignmentList.setVisible(true);;

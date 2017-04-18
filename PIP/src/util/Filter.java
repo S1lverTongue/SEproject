@@ -1,5 +1,10 @@
 package util;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class Filter {
 	
 	private static String goodAscii = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789_";
@@ -54,5 +59,14 @@ public class Filter {
 		if (checkString.matches("[0-9]+"));
 			isNum = true;
 		return isNum;
+	}
+	
+	public static Date getDate(String month, String day, String year) {
+		DateFormat df = new SimpleDateFormat("MM/dd/yyyy");
+		Date startDate = new Date();
+		try {
+			startDate = df.parse(month + "/" + day + "/" + year);
+		} catch (ParseException e) {}
+		return startDate;
 	}
 }

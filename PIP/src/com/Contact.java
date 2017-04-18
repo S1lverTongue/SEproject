@@ -52,8 +52,7 @@ public class Contact extends PIPEntity implements Serializable {
 	protected String firstName;
 	protected String lastName;
 	protected String address;
-	protected ArrayList<String> associatedEmails;
-	protected ArrayList<String> associatedPhoneNumbers;
+	protected String phoneNumber;
 	protected Date birthday;
 	protected String company;
 	protected String association;
@@ -65,8 +64,6 @@ public class Contact extends PIPEntity implements Serializable {
 	
 	// Constructor
 	public Contact() {
-		this.associatedEmails = new ArrayList<String>();
-		this.associatedPhoneNumbers = new ArrayList<String>();
 		this.birthday = Date.from(Instant.now());
 		this.associatedPIPEntities = new Linker();
 	}
@@ -111,41 +108,13 @@ public class Contact extends PIPEntity implements Serializable {
 		return this.address;
 	}
 	
-	// adds an email to the email list
-	public void addEmail(String email) {
-		this.associatedEmails.add(email);
+	public void setPhoneNumber(String number) {
+		this.phoneNumber = number;
 	}
 	
-	// removes an email from the list based on a linear search
-	public void removeEmail(String email) {
-		if (this.associatedEmails.contains(email)) {
-			this.associatedEmails.remove(email);
-		}
+	public String getPhoneNumber() {
+		return this.phoneNumber;
 	}
-	
-	// returns the email list
-	public ArrayList<String> getAssociatedEmails() {
-		return this.associatedEmails;
-	}
-	
-	// adds a phone number
-	public void addPhoneNumber(String number) {
-		this.associatedPhoneNumbers.add(number);
-	}
-	
-	// removes a phone number from the list based on
-	// a linear search
-	public void removePhoneNumber(String number) {
-		if (this.associatedPhoneNumbers.contains(number)) {
-			this.associatedPhoneNumbers.remove(number);
-		}
-	}
-	
-	// Returns the ArrayList of associated phone numbers
-	public ArrayList<String> getAssociatedPhoneNumbers() {
-		return this.associatedPhoneNumbers;
-	}
-	
 	// sets the birthday of the object
 	public void setBirthday(Date birthday) {
 		this.birthday = birthday;
@@ -232,15 +201,14 @@ public class Contact extends PIPEntity implements Serializable {
 		String returnedString = "";
 		returnedString += "Name: " + this.getLastName() + ", " + this.getFirstName() + "\n";
 		returnedString += "Address: " + this.getAddress() +"\n";
-		returnedString += "Emails: " + this.getAssociatedEmails().toString() + "\n";
-		returnedString += "Phone: " + this.getAssociatedPhoneNumbers().toString() + "\n";
+		returnedString += "Phone: " + this.getPhoneNumber() + "\n";
 		returnedString += "Is Emergency?" + this.getEmergency() + "\n";
 		if (this.birthday != null) 
 			returnedString += "Birthday: " + this.getBirthday().toString() + "\n";
 		returnedString += "Company: " + this.getCompany() + "\n";
 		returnedString += "Association: " + this.getAssociation() + "\n";
 		returnedString += "Contact Description: " + this.getDescription() + "\n";
-		returnedString += "Tags: " + this.getTag() + " \n";
+		returnedString += "Tag: " + this.getTag() + " \n";
 		return returnedString;
 	}
 	public void setTitle() {

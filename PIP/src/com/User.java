@@ -331,4 +331,12 @@ public class User implements Serializable {
 
         return result;
     }
+    
+    public ArrayList<PIPEntity> generalSearch(String term) {
+    	ArrayList<PIPEntity> x = new ArrayList<PIPEntity>();
+    	Note z = noteSec.searchByName(term);
+    	x.add(z);
+    	return x;
+    	
+    }
 }

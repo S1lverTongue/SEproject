@@ -1,21 +1,33 @@
 package gui;
 
+import com.User;
+
+import util.Filter;
+import util.IDGenerator;
+
 import com.Course;
 
 import java.awt.Dimension;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 public class AddCourseFrame extends JFrame {
+	private Course cor;
+	private User loggedInUser;
 	private int WIDTH;
 	private int HEIGHT;
 	private JLabel titleLabel;
 	private JLabel skipsLabel;
+	private JLabel tagLabel;
 	private JTextField titleField;
 	private JTextField skipsField;
+	private JTextField tagField;
+	private JButton addAssignment;
 	private JButton addButton;
 	private JButton linkButton;
 	private JButton editButton;
@@ -24,13 +36,14 @@ public class AddCourseFrame extends JFrame {
 	
 	private ArrayList<Course> collectionToAddTo;
 	
-	public AddCourseFrame(ArrayList<Course> courseCollection) {
+	public AddCourseFrame(User loggedIn) {
+		this.loggedInUser = loggedIn;
 		setTitle("Add Course");
 		setLayout(null);
 		
 		this.mode = "add";
 		
-		this.collectionToAddTo = courseCollection;
+		this.collectionToAddTo = this.loggedInUser.getCourses();
 		WIDTH = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getWidth());
 		HEIGHT = (int) Math.ceil(Toolkit.getDefaultToolkit().getScreenSize().getHeight());
 		WIDTH = WIDTH / 4;
@@ -43,11 +56,14 @@ public class AddCourseFrame extends JFrame {
 		add(titleField);
 		add(skipsLabel);
 		add(skipsField);
+		add(tagLabel);
+		add(tagField);
+		add(addAssignment);
 		add(addButton);
 		add(linkButton);
 		add(editButton);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -58,9 +74,37 @@ public class AddCourseFrame extends JFrame {
 		skipsLabel = new JLabel("Skips Allowed:");
 		skipsField = new JTextField();
 		
+		tagLabel = new JLabel("Tag:");
+		tagField = new JTextField();
+		
 		addButton = new JButton("Add");
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cor = new Course();
+				cor.setID(IDGenerator.getID());
+				cor.setTitle(titleField.getText());
+				if (Filter.isNumOnly(skipsField.getText())) {
+					cor.setSkipTotal(Integer.parseInt(skipsField.getText()));
+				}
+				cor.setTag(tagField.getText());
+				loggedInUser.newCourse(cor);
+				dispose();
+			}
+		});
+		addAssignment = new JButton("Add Assignment");
 		linkButton = new JButton("Link");
 		editButton = new JButton("Edit");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				cor.setTitle(titleField.getText());
+				if (Filter.isNumOnly(skipsField.getText())) {
+					cor.setSkipTotal(Integer.parseInt(skipsField.getText()));
+				}
+				cor.setTag(tagField.getText());
+				loggedInUser.newCourse(cor);
+				dispose();
+			}
+		});
 		setSizes();
 	}
 	
@@ -73,12 +117,14 @@ public class AddCourseFrame extends JFrame {
 		
 		addButton.setBounds((WIDTH / 100) * 85, (HEIGHT / 100) * 85, (WIDTH / 100) * 20,  20);
 		linkButton.setBounds((WIDTH / 100) * 60, (HEIGHT / 100) * 85, (WIDTH / 100) * 20, 20);
+		addAssignment.setBounds((WIDTH / 100) * 20, (HEIGHT / 100) * 85, (WIDTH / 100) * 20, 20);
 		editButton.setBounds(addButton.getBounds());
 	}
 	
 	private void populateFields(Course c) {
 		titleField.setText(c.getTitle());
 		skipsField.setText("" + c.getSkipTotal());
+		tagField.setText(c.getTag());
 	}
 	
 	public void switchContext(String toBeSwitched) {
@@ -91,10 +137,12 @@ public class AddCourseFrame extends JFrame {
 			addButton.setVisible(false);
 			editButton.setVisible(false);
 			linkButton.setVisible(false);
+			addAssignment.setVisible(false);
 		}
 	}
 	
 	public void editSelected(Course c) {
+		cor = c;
 		if (mode.equals("edit")) {
 			populateFields(c);
 			makeNotEditable(true);
@@ -108,13 +156,11 @@ public class AddCourseFrame extends JFrame {
 		if (!editNeeded) {
 			titleField.setEditable(false);
 			skipsField.setEditable(false);
+			tagField.setEditable(false);
 		} else {
 			titleField.setEditable(true);
 			skipsField.setEditable(true);
+			tagField.setEditable(true);
 		}
-	}
-	
-	public static void main(String[] args) {
-		AddCourseFrame x = new AddCourseFrame(new ArrayList<Course>());
 	}
 }

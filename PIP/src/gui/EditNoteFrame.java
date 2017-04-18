@@ -1,9 +1,15 @@
 package gui;
 
+import com.User;
 import com.Note;
+
+import util.IDGenerator;
+
 import javax.swing.JFrame;
 
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.Dimension;
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -11,17 +17,21 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 
 public class EditNoteFrame extends JFrame {
+	private User loggedInUser;
 	private int WIDTH;
 	private int HEIGHT;
 	private JLabel titleLabel;
 	private JLabel bodyLabel;
+	private JLabel tagLabel;
 	private JTextField titleField;
+	private JTextField tagField;
 	private JTextArea bodyField;
 	private JButton editButton;
 	private JButton linkButton;
 	private Note toBeEdited;
 	
-	public EditNoteFrame(Note toBeEdited) {
+	public EditNoteFrame(User loggedIn, Note toBeEdited) {
+		this.loggedInUser = loggedIn;
 		setTitle("Add Note");
 		setLayout(null);
 		
@@ -37,11 +47,13 @@ public class EditNoteFrame extends JFrame {
 		add(titleLabel);
 		add(bodyLabel);
 		add(titleField);
+		add(tagLabel);
+		add(tagField);
 		add(bodyField);
 		add(editButton);
 		add(linkButton);
 		
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setVisible(true);
 	}
 	
@@ -57,7 +69,22 @@ public class EditNoteFrame extends JFrame {
 		bodyField.setWrapStyleWord(true);
 		bodyField.setText(toBeEdited.getBody());
 		
+		tagLabel = new JLabel("Tag:");
+		tagField = new JTextField();
+		tagField.setText(toBeEdited.getTag());
+		
 		editButton = new JButton("Edit");
+		editButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				toBeEdited.setBody(bodyField.getText());
+				toBeEdited.setModified(true);
+				toBeEdited.setTitle(titleField.getText());
+				toBeEdited.setVisible(true);
+				toBeEdited.setTag(tagField.getText());
+				loggedInUser.newNote(toBeEdited);
+				dispose();
+			}
+		});
 		linkButton = new JButton("Link");
 		
 		setSizes();
@@ -68,6 +95,8 @@ public class EditNoteFrame extends JFrame {
 		titleField.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 10, (WIDTH / 100) * 70, (HEIGHT / 100) * 10);
 		bodyLabel.setBounds((WIDTH / 100) * 10, (HEIGHT / 100) * 20, (WIDTH / 100) * 20, (HEIGHT / 100) * 10);
 		bodyField.setBounds((WIDTH / 100) * 10, (HEIGHT / 100) * 30, (WIDTH / 100) * 90, (HEIGHT / 100) * 55);
+		tagLabel.setBounds((WIDTH / 100) * 10, (HEIGHT / 100) * 90, (WIDTH / 100) * 20, 15);
+		tagField.setBounds((WIDTH / 100) * 20, (HEIGHT / 100) * 90, (WIDTH / 100) * 20, 15);
 		linkButton.setBounds((WIDTH / 100) * 50, (HEIGHT / 100) * 90, (WIDTH / 100) * 20, 15);
 		editButton.setBounds((WIDTH / 100) * 75, (HEIGHT / 100) * 90,  (WIDTH / 100) * 20, 15);
 	}
@@ -77,12 +106,6 @@ public class EditNoteFrame extends JFrame {
 		linkButton.setVisible(editable);
 		titleField.setEditable(editable);
 		bodyField.setEditable(editable);
-	}
-	
-	public static void main(String[] args) {
-		Note test = new Note();
-		test.setTitle("Help");
-		test.setBody("I'm stuck in a Chinese Fortune Cookie Factory! Send for the national guard, the army, johnny quest, anybody!!");
-		EditNoteFrame x = new EditNoteFrame(test);
+		tagField.setEditable(editable);
 	}
 }

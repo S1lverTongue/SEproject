@@ -149,7 +149,7 @@ public class AssignmentView extends JPanel {
 		detailedAssignment.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (jListOfAssignments.getSelectedIndex() != -1) {
-					DetailAssignmentFrame detailedContactView = new DetailAssignmentFrame(loggedInUser, courseAssignments, courseAssignments.get(jListOfAssignments.getSelectedIndex()));
+					DetailAssignmentFrame detailedContactView = new DetailAssignmentFrame(loggedInUser, cor, courseAssignments, courseAssignments.get(jListOfAssignments.getSelectedIndex()));
 				}
 			}
 		});
