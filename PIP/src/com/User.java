@@ -285,4 +285,20 @@ public class User implements Serializable {
         else
             return false;
     }
+
+    public ArrayList<Note> getNotes() {
+        return notes;
+    }
+
+    public ArrayList<Course> getCourses() {
+        return courses;
+    }
+
+    public ArrayList<Contact> getContacts() {
+        return contacts;
+    }
+
+    public ArrayList<CalendarEvent> getCalendarEvents() {
+        return calendarEvents;
+    }
 }
