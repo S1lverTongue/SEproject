@@ -1,3 +1,4 @@
+// Coded by Trent May
 package app;
 
 import javax.swing.JFrame;
@@ -11,9 +12,9 @@ public class PIPStart {
 		try {
 			mainWindow = new LoginFrame();
 		} catch (Exception e) {
-			System.out.println("Error Occurred");
-			System.out.println("Error: " + e.getMessage());
-			e.printStackTrace();
+			//System.out.println("Error Occurred");
+			//System.out.println("Error: " + e.getMessage());
+			//e.printStackTrace();
 		}
 	}
 	

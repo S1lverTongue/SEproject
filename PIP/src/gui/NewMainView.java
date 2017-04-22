@@ -1,15 +1,29 @@
+// Coded by Trent May
 package gui;
 
 import com.*;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.ToolTipManager;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JList;
 
 public class NewMainView extends JPanel {
@@ -18,6 +32,7 @@ public class NewMainView extends JPanel {
 	private JScrollPane detailView;
 	private JButton skip;
 	private Dimension parentWindowSize;
+	private ListSelectionModel assignmentModel;
 	private User loggedInUser;
 	private int WIDTH;
 	private int HEIGHT;
@@ -28,7 +43,6 @@ public class NewMainView extends JPanel {
 		this.loggedInUser.onLogin();
 		setBackground(Color.DARK_GRAY);
 		setLayout(null);
-		
 		initComponents();
 		add(upcomingAssignments);
 		add(componentView);
@@ -40,22 +54,37 @@ public class NewMainView extends JPanel {
 	public void initComponents() {
 		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
-		
 		JList assignmentList = new JList();
+		ArrayList<Assignment> allAssignments = new ArrayList<Assignment>();
 		DefaultListModel dlm = new DefaultListModel();
 		for (int i = 0; i < loggedInUser.getCourses().size(); i++) {
 			Course curr = loggedInUser.getCourses().get(i);
 			if (curr.getAssignments() != null) {
 				for (int assignmentIndex = 0; assignmentIndex < curr.getAssignments().size(); assignmentIndex++) {
 					dlm.addElement(curr.getAssignments().get(assignmentIndex).getTitle());
+					allAssignments.add(curr.getAssignments().get(assignmentIndex));
 				}
 			}
 			
 		}
 		assignmentList.setModel(dlm);
-		assignmentList.setVisible(true);;
+		assignmentModel = assignmentList.getSelectionModel();
+		assignmentModel.addListSelectionListener(new ListSelectionListener() {
+
+			@Override
+			public void valueChanged(ListSelectionEvent arg0) {
+				if (assignmentList.getSelectedIndex() != -1)
+					componentView.setText(allAssignments.get(assignmentList.getSelectedIndex()).toString());
+				else
+					componentView.setText("");
+			}
+			
+		});
+		assignmentList.setVisible(true);
 		upcomingAssignments = new JScrollPane(assignmentList);
+		
 		componentView = new JTextPane();
+		componentView.setEditable(false);
 		
 		detailView = new JScrollPane();
 		detailView.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);

@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.User;
@@ -27,7 +28,6 @@ public class AddCourseFrame extends JFrame {
 	private JTextField titleField;
 	private JTextField skipsField;
 	private JTextField tagField;
-	private JButton addAssignment;
 	private JButton addButton;
 	private JButton linkButton;
 	private JButton editButton;
@@ -58,7 +58,6 @@ public class AddCourseFrame extends JFrame {
 		add(skipsField);
 		add(tagLabel);
 		add(tagField);
-		add(addAssignment);
 		add(addButton);
 		add(linkButton);
 		add(editButton);
@@ -91,7 +90,6 @@ public class AddCourseFrame extends JFrame {
 				dispose();
 			}
 		});
-		addAssignment = new JButton("Add Assignment");
 		linkButton = new JButton("Link");
 		editButton = new JButton("Edit");
 		editButton.addActionListener(new ActionListener() {
@@ -117,7 +115,6 @@ public class AddCourseFrame extends JFrame {
 		
 		addButton.setBounds((WIDTH / 100) * 85, (HEIGHT / 100) * 85, (WIDTH / 100) * 20,  20);
 		linkButton.setBounds((WIDTH / 100) * 60, (HEIGHT / 100) * 85, (WIDTH / 100) * 20, 20);
-		addAssignment.setBounds((WIDTH / 100) * 20, (HEIGHT / 100) * 85, (WIDTH / 100) * 20, 20);
 		editButton.setBounds(addButton.getBounds());
 	}
 	
@@ -137,7 +134,6 @@ public class AddCourseFrame extends JFrame {
 			addButton.setVisible(false);
 			editButton.setVisible(false);
 			linkButton.setVisible(false);
-			addAssignment.setVisible(false);
 		}
 	}
 	

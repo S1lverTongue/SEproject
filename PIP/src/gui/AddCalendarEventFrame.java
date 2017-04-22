@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.User;
@@ -117,6 +118,8 @@ public class AddCalendarEventFrame extends JFrame {
 					newEvent.setTag(tagField.getText());
 					loggedInUser.newCalendarEvent(newEvent);
 					dispose();
+				} else {
+					Error_Se error = new Error_Se(new JFrame("Error"), false);
 				}
 			}
 		});

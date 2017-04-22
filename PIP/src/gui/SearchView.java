@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.PIPEntity;
@@ -82,7 +83,8 @@ public class SearchView extends JPanel {
 		});
 		searchEntity.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				results = loggedInUser.generalSearch((entitySearch.getText()));
+				results = loggedInUser.searchByTitle((entitySearch.getText()));
+				PIPEntityModel.removeAllElements();
 				for (int i = 0; i < results.size(); i++) {
 					PIPEntityModel.add(i, results.get(i).getTitle());
 				}
@@ -93,6 +95,7 @@ public class SearchView extends JPanel {
 		entityList = new JScrollPane(jListOfPIPEntities);
 		entityList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		entityView = new JTextPane();
+		entityView.setEditable(false);
 		addEntity = new JButton("Add");
 		deleteEntity = new JButton("Delete");
 		editEntity = new JButton("Edit");

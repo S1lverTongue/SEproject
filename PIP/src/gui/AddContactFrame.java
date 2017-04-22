@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import util.Filter;
@@ -127,6 +128,8 @@ public class AddContactFrame extends JFrame {
 		
 		descriptionLabel = new JLabel("Description:");
 		descriptionField =new JTextArea();
+		descriptionField.setLineWrap(true);
+		descriptionField.setWrapStyleWord(true);
 		
 		tagLabel = new JLabel("Tag:");
 		tagField = new JTextField();

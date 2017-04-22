@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.Contact;
@@ -25,10 +26,8 @@ import javax.swing.event.ListSelectionListener;
 
 public class ContactsView extends JPanel {
 	private User loggedInUser;
-	private JTextField contactSearch;
 	private JScrollPane contactList;
 	private JTextPane contactView;
-	private JButton searchContacts;
 	private JButton addContact;
 	private JButton deleteContact;
 	private JButton editContact;
@@ -49,8 +48,6 @@ public class ContactsView extends JPanel {
 		setLayout(null);
 		
 		initComponents();
-		add(contactSearch);
-		add(searchContacts);
 		add(contactList);
 		add(addContact);
 		add(deleteContact);
@@ -62,10 +59,6 @@ public class ContactsView extends JPanel {
 	public void initComponents() {
 		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
-		
-		contactSearch = new JTextField();
-		contactSearch.setText("Search");
-		searchContacts = new JButton("Search");
 		
 		jListOfContacts = new JList();
 		contactModel = new DefaultListModel();
@@ -87,6 +80,7 @@ public class ContactsView extends JPanel {
 		contactList = new JScrollPane(jListOfContacts);
 		contactList.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		contactView = new JTextPane();
+		contactView.setEditable(false);
 		
 		addContact = new JButton("Add");
 		addContact.addActionListener(new ActionListener() {
@@ -155,8 +149,6 @@ public class ContactsView extends JPanel {
 	}
 	
 	public void setSizes() {
-		contactSearch.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 5, (WIDTH / 100) * 20, 20);
-		searchContacts.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 5, (WIDTH / 100) * 15, 20);
 		contactList.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		contactView.setBounds((WIDTH / 100) * 55, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		addContact.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);

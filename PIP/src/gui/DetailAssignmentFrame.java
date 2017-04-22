@@ -1,3 +1,4 @@
+// coded by Trent May
 package gui;
 
 import com.Course;
@@ -10,7 +11,7 @@ public class DetailAssignmentFrame extends AddAssignmentFrame {
 	
 	public DetailAssignmentFrame(User loggedInUser, Course cor, ArrayList<Assignment> collection, Assignment toBeViewed) {
 		super(loggedInUser, cor, collection);
-		super.setTitle("View Assignment");
+		super.setTitle(toBeViewed.getTitle() + " Detail");
 		super.switchContext("detail");
 		super.editSelected(toBeViewed);
 	}

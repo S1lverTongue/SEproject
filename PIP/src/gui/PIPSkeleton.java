@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 import com.User;
 import javax.swing.JFrame;
@@ -27,6 +28,7 @@ public class PIPSkeleton extends JFrame {
 		curr = this;
 		this.d = (Toolkit.getDefaultToolkit().getScreenSize());
 		setSize(d);
+		setTitle("PIP - v1.0 ~ " + this.loggedInUser.getUsername());
 		setMinimumSize(new Dimension(775, 750));
 		setResizable(true);
 		setVisible(true);

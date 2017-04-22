@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.User;
@@ -32,7 +33,7 @@ public class EditNoteFrame extends JFrame {
 	
 	public EditNoteFrame(User loggedIn, Note toBeEdited) {
 		this.loggedInUser = loggedIn;
-		setTitle("Add Note");
+		setTitle(toBeEdited.getTitle() + " Edit");
 		setLayout(null);
 		
 		this.toBeEdited = toBeEdited;

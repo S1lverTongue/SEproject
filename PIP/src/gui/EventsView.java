@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.CalendarEvent;
@@ -25,10 +26,8 @@ import javax.swing.event.ListSelectionListener;
 
 public class EventsView extends JPanel {
 	private User loggedInUser;
-	private JTextField eventSearch;
 	private JScrollPane eventList;
 	private JTextPane eventView;
-	private JButton searchEvents;
 	private JButton addEvent;
 	private JButton deleteEvent;
 	private JButton editEvent;
@@ -49,8 +48,6 @@ public class EventsView extends JPanel {
 		setLayout(null);
 		
 		initComponents();
-		add(eventSearch);
-		add(searchEvents);
 		add(eventList);
 		add(addEvent);
 		add(deleteEvent);
@@ -63,11 +60,9 @@ public class EventsView extends JPanel {
 		WIDTH = (int) Math.ceil(parentWindowSize.getWidth());
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
 		
-		eventSearch = new JTextField();
-		eventSearch.setText("Search");
-		searchEvents = new JButton("Search");
 		
 		eventView = new JTextPane();
+		eventView.setEditable(false);
 		
 		jListOfEvents = new JList();
 		eventModel = new DefaultListModel();
@@ -157,8 +152,6 @@ public class EventsView extends JPanel {
 	}
 	
 	public void setSizes() {
-		eventSearch.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 5, (WIDTH / 100) * 20, 20);
-		searchEvents.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 5, (WIDTH / 100) * 15, 20);
 		eventList.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		eventView.setBounds((WIDTH / 100) * 55, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		addEvent.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);

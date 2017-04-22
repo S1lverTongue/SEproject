@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import util.*;
@@ -25,7 +26,7 @@ public class LoginFrame extends JFrame {
 	
 	public LoginFrame() {
 		current = this;
-		setTitle("PIP");
+		setTitle("PIP - v1.0 Login");
 		setSize(473, 198); // work later
 		setLocation(120, 120);
 		getContentPane().setLayout(new BorderLayout(0, 0));

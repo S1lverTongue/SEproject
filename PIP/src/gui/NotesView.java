@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.User;
@@ -25,10 +26,8 @@ import javax.swing.event.ListSelectionListener;
 
 public class NotesView extends JPanel {
 	private User loggedInUser;
-	private JTextField noteSearch;
 	private JScrollPane noteList;
 	private JTextPane noteView;
-	private JButton searchNotes;
 	private JButton addNote;
 	private JButton deleteNote;
 	private JButton editNote;
@@ -49,8 +48,6 @@ public class NotesView extends JPanel {
 		setLayout(null);
 		
 		initComponents();
-		add(noteSearch);
-		add(searchNotes);
 		add(noteList);
 		add(addNote);
 		add(deleteNote);
@@ -64,10 +61,7 @@ public class NotesView extends JPanel {
 		HEIGHT = (int) Math.ceil(parentWindowSize.getHeight());
 		
 		noteView = new JTextPane();
-		
-		noteSearch = new JTextField();
-		noteSearch.setText("Search");
-		searchNotes = new JButton("Search");
+		noteView.setEditable(false);
 		
 		jListOfNotes = new JList();
 		noteModel = new DefaultListModel();
@@ -186,8 +180,6 @@ public class NotesView extends JPanel {
 	}
 	
 	public void setSizes() {
-		noteSearch.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 5, (WIDTH / 100) * 20, 20);
-		searchNotes.setBounds((WIDTH / 100) * 30, (HEIGHT / 100) * 5, (WIDTH / 100) * 15, 20);
 		noteList.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		noteView.setBounds((WIDTH / 100) * 55, (HEIGHT / 100) * 10, (WIDTH / 100) * 40, (HEIGHT / 100) * 70);
 		addNote.setBounds((WIDTH / 100) * 5, (HEIGHT / 100) * 85, (WIDTH / 100) * 15, 25);

@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.User;
@@ -7,7 +8,7 @@ public class DetailCourseFrame extends AddCourseFrame {
 	
 	public DetailCourseFrame(User loggedIn, Course toBeViewed) {
 		super(loggedIn);
-		super.setTitle("Course Details");
+		super.setTitle(toBeViewed.getTitle() + " Details");
 		super.switchContext("detail");
 		super.editSelected(toBeViewed);
 	}

@@ -1,9 +1,11 @@
+// Coded by Trent May
 package gui;
 
 import com.Course;
 import com.User;
 
 import util.Filter;
+import util.IDGenerator;
 
 import com.Assignment;
 
@@ -19,6 +21,7 @@ import javax.swing.JButton;
 import java.awt.Dimension;
 
 public class AddAssignmentFrame extends JFrame {
+	private Assignment newAssignment;
 	private User loggedInUser;
 	private Course cor;
 	private int WIDTH;
@@ -44,7 +47,7 @@ public class AddAssignmentFrame extends JFrame {
 	public AddAssignmentFrame(User loggedIn, Course cor, ArrayList<Assignment> assignmentCollection) {
 		this.loggedInUser = loggedIn;
 		this.cor = cor;
-		setTitle("Add CalendarEvent");
+		setTitle("Add Assignment");
 		setLayout(null);
 		
 		this.mode = "add";
@@ -96,7 +99,8 @@ public class AddAssignmentFrame extends JFrame {
 		addButton = new JButton("Add");
 		addButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Assignment newAssignment = new Assignment();
+				newAssignment = new Assignment();
+				newAssignment.setID(IDGenerator.getID());
 				newAssignment.setTitle(eventTitleField.getText());
 				newAssignment.setDescription(descriptionField.getText());
 				if (Filter.isEmerg(reminderField.getText())) {
@@ -112,7 +116,18 @@ public class AddAssignmentFrame extends JFrame {
 		editButton = new JButton("Edit");
 		editButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				newAssignment.setTitle(eventTitleField.getText());
+				newAssignment.setDescription(descriptionField.getText());
+				if (Filter.isEmerg(reminderField.getText())) {
+					newAssignment.setRemindMe(true);
+				} else {
+					newAssignment.setRemindMe(false);
+				}
+				Assignment old = newAssignment;
+				cor.removeAssignment(old);
+				cor.addAssignment(newAssignment);
+				loggedInUser.newCourse(cor);
+				dispose();
 			}
 		});
 		
@@ -140,6 +155,7 @@ public class AddAssignmentFrame extends JFrame {
 	}
 	
 	private void populateFields(Assignment cal) {
+		newAssignment = cal;
 		eventTitleField.setText(cal.getTitle());
 		dateDayField.setText("" + cal.getDate().getDay());
 		dateMonthField.setText("" + cal.getDate().getMonth());

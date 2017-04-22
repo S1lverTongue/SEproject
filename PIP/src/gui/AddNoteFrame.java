@@ -1,3 +1,4 @@
+// Coded by Trent May
 package gui;
 
 import com.Note;
